@@ -17,6 +17,7 @@ public class Swagger3Config {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30)
+                .host("https://www.hihia.top/android-back-end-api")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
