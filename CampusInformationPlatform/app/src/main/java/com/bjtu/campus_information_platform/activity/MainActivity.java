@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         //设置顶部状态栏为透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         getBtn = (Button) findViewById(R.id.getBtn);
         postBtn = (Button) findViewById(R.id.postBtn);

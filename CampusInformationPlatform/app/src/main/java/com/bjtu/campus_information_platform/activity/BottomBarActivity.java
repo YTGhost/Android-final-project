@@ -35,7 +35,7 @@ public class BottomBarActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         //设置顶部状态栏为透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager_bottom);
         mBubbleNavigationLinearView = (BubbleNavigationLinearView) findViewById(R.id.bottom_navigation_view_linear);
