@@ -2,6 +2,7 @@ package com.bjtu.campus_information_platform.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -20,14 +21,21 @@ public class MainActivity extends AppCompatActivity {
 
     private Button getBtn;
     private Button postBtn;
+    private Button startActivityBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         getBtn = (Button) findViewById(R.id.getBtn);
         postBtn = (Button) findViewById(R.id.postBtn);
+        startActivityBtn = (Button) findViewById(R.id.startActivityBtn);
+
+        startActivityBtn.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this,BottomBarActivity.class));
+        });
 
         getBtn.setOnClickListener(v -> {
             HttpRequest.getTestApi(null, new ResponseCallback() {

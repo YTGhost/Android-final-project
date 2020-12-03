@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Campus-Information-Platform</string>
+    <string name="home">首页</string>
+    <string name="classList">课程表</string>
+    <string name="hole">树洞</string>
+    <string name="sport">运动</string>
+    <string name="profile">个人</string>
 </resources>
