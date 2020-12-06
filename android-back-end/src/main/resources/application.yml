@@ -24,5 +24,13 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
       useGlobalDataSourceStat: true
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMills=500
+# 邮件发送配置
+  mail:
+    host: smtp.163.com
+    password: ORVJZMWZQPYRLZIN
+    username: ythihia@163.com
+    port: 465
+    protocol: smtps
+    default-encoding: UTF-8
 server:
   port: 6382
