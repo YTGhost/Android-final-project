@@ -1,6 +1,7 @@
 package com.bjtu.androidbackend.mapper;
 
 import com.bjtu.androidbackend.model.Account;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,12 @@ import java.util.List;
 @Component
 public interface AccountMapper {
 
-    @Select("select password from account where username = #{username}")
-    public List<Account> login(String username);
+    @Select("select password from account where email = #{Email}")
+    public List<Account> loginByEmail(String Email);
+
+    @Select("select password from account where nickname = #{nickname}")
+    public List<Account> loginByNickname(String nickname);
+
+    @Insert("insert into account (nickname, email, password) values (#{nickname}, #{email}, #{password})")
+    public void register(Account account);
 }

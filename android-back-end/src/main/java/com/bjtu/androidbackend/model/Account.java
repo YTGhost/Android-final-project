@@ -20,6 +20,9 @@ public class Account implements Serializable {
     @ApiModelProperty(name = "password", value = "密码", required = true)
     private String password;
 
+    @ApiModelProperty(name = "code", value = "校验码", required = false)
+    private String code;
+
     public Integer getId() {
         return id;
     }
@@ -52,6 +55,14 @@ public class Account implements Serializable {
         this.password = password;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -59,6 +70,7 @@ public class Account implements Serializable {
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }

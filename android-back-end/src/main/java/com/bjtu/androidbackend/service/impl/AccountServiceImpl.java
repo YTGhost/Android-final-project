@@ -15,7 +15,17 @@ public class AccountServiceImpl implements AccountService {
     private AccountMapper accountMapper;
 
     @Override
-    public List<Account> login(String username) {
-        return accountMapper.login(username);
+    public List<Account> loginByEmail(String email) {
+        return accountMapper.loginByEmail(email);
+    }
+
+    @Override
+    public List<Account> loginByNickname(String nickname) {
+        return accountMapper.loginByNickname(nickname);
+    }
+
+    @Override
+    public void register(Account account) {
+        accountMapper.register(account);
     }
 }
