@@ -46,7 +46,8 @@ public class AccountController {
             } else {
                 item = list2.get(0);
             }
-            if(item.getPassword().equals(account.getPassword())) {
+            BCrypt.Result result = BCrypt.verifyer().verify(account.getPassword().toCharArray(), item.getPassword());
+            if(result.verified) {
                 map.put("code", 0);
                 map.put("data", "");
                 map.put("msg", "登录成功");
