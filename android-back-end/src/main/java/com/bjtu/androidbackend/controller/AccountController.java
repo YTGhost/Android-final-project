@@ -1,5 +1,6 @@
 package com.bjtu.androidbackend.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.bjtu.androidbackend.model.Account;
 import com.bjtu.androidbackend.service.AccountService;
 import com.bjtu.androidbackend.util.JedisInstance;
@@ -70,6 +71,7 @@ public class AccountController {
             Jedis jedis = JedisInstance.getInstance().getResource();
             // 验证成功
             if(code.equals(jedis.get(account.getEmail()))) {
+                account.setPassword(BCrypt.withDefaults().hashToString(10, account.getPassword().toCharArray()));
                 accountService.register(account);
                 map.put("code", 0);
                 map.put("data", "");
