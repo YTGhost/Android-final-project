@@ -32,20 +32,14 @@ public class AccountController {
     @PostMapping(value = "/login")
     @ResponseBody
     public Map<String, Object> Login(@RequestBody Account account) {
-        List<Account> list1 = accountService.loginByEmail(account.getEmail());
-        List<Account> list2 = accountService.loginByNickname(account.getNickname());
+        List<Account> list = accountService.loginByEmail(account.getEmail());
         Map<String, Object> map = new HashMap<>();
-        if(list1.isEmpty() && list2.isEmpty()) {
+        if(list.isEmpty()) {
             map.put("code", 1);
             map.put("data", "");
-            map.put("msg", "未找到用户名或邮箱");
+            map.put("msg", "未找到邮箱");
         } else {
-            Account item;
-            if(!list1.isEmpty()) {
-                item = list1.get(0);
-            } else {
-                item = list2.get(0);
-            }
+            Account item = list.get(0);
             BCrypt.Result result = BCrypt.verifyer().verify(account.getPassword().toCharArray(), item.getPassword());
             if(result.verified) {
                 map.put("code", 0);
