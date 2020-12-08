@@ -41,9 +41,9 @@ public class StepController {
         });
         //返回数据
         Map<String,Object> res=new HashMap<>();
-        res.put("msg","OK");
-        res.put("num",list.size());
+        res.put("code",0);
         res.put("data",list);
+        res.put("msg","获取步数成功");
         return res;
     }
 
