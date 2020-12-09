@@ -32,6 +32,7 @@ public class StepController {
 
         //为所有步数排序
         Map<String,String> steps=jedis.hgetAll(stepKey);
+        jedis.close();
         List<Map.Entry<String,String>> list=new ArrayList<>(steps.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, String>>() {
             @Override

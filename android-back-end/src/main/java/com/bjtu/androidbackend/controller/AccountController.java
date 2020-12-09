@@ -96,6 +96,7 @@ public class AccountController {
         mailService.sendMail(email, "请查收验证码", "您的验证码为：" + verification.toString() + "，请在5分钟内验证。");
         Jedis jedis = JedisInstance.getInstance().getResource();
         jedis.setex(email, 300, verification.toString());
+        jedis.close();
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("data", verification.toString());

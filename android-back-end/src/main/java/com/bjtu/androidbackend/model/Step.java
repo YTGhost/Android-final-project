@@ -3,8 +3,10 @@ package com.bjtu.androidbackend.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 @ApiModel(value = "用户计步模块")
-public class Step {
+public class Step implements Serializable{
     @ApiModelProperty(name = "nickname", value = "用户名", required = false)
     private String nickname;
 
