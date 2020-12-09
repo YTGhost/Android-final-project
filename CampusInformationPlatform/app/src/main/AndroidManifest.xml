@@ -16,6 +16,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 从SDCard读取数据权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 发起foreground -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+
     <application
         android:name=".activity.MyApplication"
         android:allowBackup="true"
@@ -23,7 +29,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CampusInformationPlatform">
+        android:theme="@style/Theme.CampusInformationPlatform"
+        android:requestLegacyExternalStorage="true"
+        >
+
         <activity android:name=".activity.BottomBarActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -32,6 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
+
 
 </manifest>

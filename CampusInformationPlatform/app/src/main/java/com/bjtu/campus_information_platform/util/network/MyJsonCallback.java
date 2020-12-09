@@ -126,7 +126,7 @@ public class MyJsonCallback implements Callback {
                         }
                     }
                 } else { //将服务端返回的异常回调到应用层去处理
-                    mListener.onFailure(new OkHttpException((Integer) result.get(RESULT_CODE), result.get(ERROR_MSG) + ""));
+                    mListener.onFailure(new OkHttpException(OTHER_ERROR, result.get(ERROR_MSG) + ""));
                     Log.e("TAG","onResponse处理失败");
                 }
             }

@@ -1,8 +1,17 @@
 package com.bjtu.campus_information_platform.activity;
 
-import android.graphics.Color;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +25,11 @@ import com.bjtu.campus_information_platform.fragment.HoleFragment;
 import com.bjtu.campus_information_platform.fragment.HomeFragment;
 import com.bjtu.campus_information_platform.fragment.ProfileFragment;
 import com.bjtu.campus_information_platform.fragment.SportFragment;
+
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
+import com.today.step.lib.ISportStepInterface;
+import com.today.step.lib.TodayStepManager;
+import com.today.step.lib.TodayStepService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +41,13 @@ public class BottomBarActivity extends AppCompatActivity {
     private List<Fragment> mFragmentList = new ArrayList<>();
     private ScreenSlidePageFragmentAdapter mAdapter;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_bar);
         getSupportActionBar().hide();
-        //设置顶部状态栏为透明
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager_bottom);
         mBubbleNavigationLinearView = (BubbleNavigationLinearView) findViewById(R.id.bottom_navigation_view_linear);
@@ -44,7 +56,7 @@ public class BottomBarActivity extends AppCompatActivity {
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new ClassListFragment());
         mFragmentList.add(new HoleFragment());
-        mFragmentList.add(new SportFragment());
+        mFragmentList.add(new SportFragment(this));
         mFragmentList.add(new ProfileFragment());
 
         // 设置适配器
@@ -73,5 +85,14 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView.setNavigationChangeListener((view, position) -> {
             mViewPager.setCurrentItem(position, true);
         });
+
     }
+
+
+
+
+
+
+
+
 }
