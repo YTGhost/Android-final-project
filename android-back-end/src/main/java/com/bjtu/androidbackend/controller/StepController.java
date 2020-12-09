@@ -39,11 +39,24 @@ public class StepController {
                 return Integer.parseInt(o2.getValue())-Integer.parseInt(o1.getValue());
             }
         });
+        //放入数据列表
+        List<Step> data=new ArrayList<>();
+        list.forEach((i)->{
+            Step userStep=new Step();
+            userStep.setNickname(i.getKey());
+            if(i.getValue()!=null){
+                userStep.setSteps(Integer.parseInt(i.getValue()));
+            }else {
+                userStep.setSteps(0);
+            }
+            data.add(userStep);
+        });
         //返回数据
         Map<String,Object> res=new HashMap<>();
         res.put("code",0);
-        res.put("data",list);
+        res.put("data",data);
         res.put("msg","获取步数成功");
+        jedis.close();
         return res;
     }
 
