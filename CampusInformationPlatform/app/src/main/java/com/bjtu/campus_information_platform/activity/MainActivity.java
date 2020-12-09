@@ -5,25 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bjtu.campus_information_platform.R;
-import com.bjtu.campus_information_platform.model.Test;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.OkHttpException;
 import com.bjtu.campus_information_platform.util.network.RequestParams;
 import com.bjtu.campus_information_platform.util.network.ResponseCallback;
-
-import java.util.List;
+import com.google.android.material.textfield.TextInputEditText;
+import com.royrodriguez.transitionbutton.TransitionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button getBtn;
-    private Button postBtn;
-    private Button startActivityBtn;
+//    private Button getBtn;
+//    private Button postBtn;
+//    private Button startActivityBtn;
+//    private TransitionButton transitionButton;
+    private TextInputEditText emailInput;
+    private TextInputEditText passwordInput;
+    private TransitionButton loginBtn;
+    private TextView registerText;
+    private TextView forgetText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,54 +37,43 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         //设置顶部状态栏为透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        emailInput = (TextInputEditText) findViewById(R.id.R_emailInput);
+        passwordInput = (TextInputEditText) findViewById(R.id.R_passwordInput);
+        loginBtn = (TransitionButton) findViewById(R.id.loginBtn);
+        registerText = (TextView) findViewById(R.id.registerText);
+        forgetText = (TextView) findViewById(R.id.forgetText);
 
-        getBtn = (Button) findViewById(R.id.getBtn);
-        postBtn = (Button) findViewById(R.id.postBtn);
-        startActivityBtn = (Button) findViewById(R.id.startActivityBtn);
-
-        startActivityBtn.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this,BottomBarActivity.class));
-        });
-
-        getBtn.setOnClickListener(v -> {
-            HttpRequest.getTestApi(null, new ResponseCallback() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    Toast.makeText(MainActivity.this, "请求成功" + responseObj.toString(), Toast.LENGTH_SHORT).show();
-                    List<Test> list = (List<Test>) responseObj;
-                    for(int i = 0; i < list.size(); i++) {
-                        Test test = list.get(i);
-                        Toast.makeText(MainActivity.this, "请求成功:" + test.getId() + "," + test.getUsername() + "," + test.getPassword(), Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-                @Override
-                public void onFailure(OkHttpException failuer) {
-                    Log.e("TAG", "请求失败=" + failuer.getEmsg());
-                    Toast.makeText(MainActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
-
-        postBtn.setOnClickListener(v -> {
-            System.out.println("测试测试测试");
+        loginBtn.setOnClickListener(v -> {
+            loginBtn.startAnimation();
+            final Handler handler = new Handler();
             RequestParams params = new RequestParams();
-            params.put("username", "admin");
-            params.put("password", "123456");
-            HttpRequest.postTestApi(params, new ResponseCallback() {
+            params.put("email", emailInput.getText().toString());
+            params.put("password", passwordInput.getText().toString());
+            HttpRequest.loginRequest(params, new ResponseCallback() {
                 @Override
                 public void onSuccess(Object responseObj) {
-                    Toast.makeText(MainActivity.this, "请求成功" + responseObj.toString(), Toast.LENGTH_SHORT).show();
+                    loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, () -> {
+                        Intent intent = new Intent(getBaseContext(), BottomBarActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                        handler.postDelayed(() -> finish(), 2000);
+                    });
                 }
 
                 @Override
                 public void onFailure(OkHttpException failuer) {
+                    handler.postDelayed(() -> {
+                        loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
+                    }, 2000);
                     Log.e("TAG", "请求失败=" + failuer.getEmsg());
-                    Toast.makeText(MainActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                 }
             });
+        });
+
+        registerText.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), RegisterActivity.class);
+            startActivity(intent);
         });
     }
 }

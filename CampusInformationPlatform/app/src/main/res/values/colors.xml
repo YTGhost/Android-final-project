@@ -40,4 +40,6 @@
     <color name="yellow_bg_light">#fffde7</color>
     <color name="orange_bg_light">#fff3e0</color>
     <color name="grey_bg_light">#fafafa</color>
+
+    <color name="textInputLayout">#96ffffff</color>
 </resources>

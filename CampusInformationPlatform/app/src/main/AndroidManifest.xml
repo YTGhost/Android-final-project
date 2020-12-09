@@ -25,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusInformationPlatform">
         <activity android:name=".activity.BottomBarActivity" />
+        <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
