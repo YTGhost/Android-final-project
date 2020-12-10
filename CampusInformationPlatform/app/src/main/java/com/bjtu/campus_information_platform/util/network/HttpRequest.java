@@ -1,5 +1,6 @@
 package com.bjtu.campus_information_platform.util.network;
 
+import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.model.Test;
 import com.google.gson.reflect.TypeToken;
 
@@ -69,5 +70,14 @@ public class HttpRequest {
      */
     public static void judgeNicknameRequest(String nickname, RequestParams params, ResponseCallback callback) {
         RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/judgeNickname/" + nickname, params, callback, null);
+    }
+
+    /**
+     * 更新当前用户步数并获取所有用户步数
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void postStepApi(RequestParams params,ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep",params,callback,new TypeToken<List<Step>>(){}.getType());
     }
 }
