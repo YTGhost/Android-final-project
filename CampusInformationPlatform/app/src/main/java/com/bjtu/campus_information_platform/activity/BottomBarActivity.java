@@ -11,11 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.adapter.ScreenSlidePageFragmentAdapter;
-import com.bjtu.campus_information_platform.fragment.ClassListFragment;
-import com.bjtu.campus_information_platform.fragment.HoleFragment;
-import com.bjtu.campus_information_platform.fragment.HomeFragment;
-import com.bjtu.campus_information_platform.fragment.ProfileFragment;
-import com.bjtu.campus_information_platform.fragment.SportFragment;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
 import java.util.ArrayList;
