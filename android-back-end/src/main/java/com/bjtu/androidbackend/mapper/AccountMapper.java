@@ -12,10 +12,10 @@ import java.util.List;
 @Component
 public interface AccountMapper {
 
-    @Select("select password from account where email = #{Email}")
+    @Select("select * from account where email = #{Email}")
     public List<Account> loginByEmail(String Email);
 
-    @Select("select password from account where nickname = #{nickname}")
+    @Select("select * from account where nickname = #{nickname}")
     public List<Account> loginByNickname(String nickname);
 
     @Insert("insert into account (nickname, email, password) values (#{nickname}, #{email}, #{password})")

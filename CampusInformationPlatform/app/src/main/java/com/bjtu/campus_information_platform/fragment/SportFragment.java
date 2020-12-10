@@ -54,7 +54,7 @@ public class SportFragment extends Fragment {
 
     ArrayAdapter<String> adapter;
 
-    public SportFragment(Activity activity) {
+    public void setActivity(Activity activity) {
         this.activity = activity;
     }
 

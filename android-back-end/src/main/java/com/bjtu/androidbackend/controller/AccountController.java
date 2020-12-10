@@ -43,7 +43,7 @@ public class AccountController {
             BCrypt.Result result = BCrypt.verifyer().verify(account.getPassword().toCharArray(), item.getPassword());
             if(result.verified) {
                 map.put("code", 0);
-                map.put("data", "");
+                map.put("data", item);
                 map.put("msg", "登录成功");
             } else {
                 map.put("code", 2);

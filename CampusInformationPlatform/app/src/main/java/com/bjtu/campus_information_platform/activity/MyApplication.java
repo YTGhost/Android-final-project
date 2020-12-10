@@ -5,6 +5,13 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.bjtu.campus_information_platform.fragment.ClassListFragment;
+import com.bjtu.campus_information_platform.fragment.HoleFragment;
+import com.bjtu.campus_information_platform.fragment.HomeFragment;
+import com.bjtu.campus_information_platform.fragment.ProfileFragment;
+import com.bjtu.campus_information_platform.fragment.SportFragment;
+import com.bjtu.campus_information_platform.model.Account;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +24,17 @@ import java.util.List;
 * 所以可以通过它来进行如数据传递、数据共享和数据缓存等操作*/
 public class MyApplication extends Application {
 
+    // Application和Fragment单例
     private static MyApplication sApplication;
+    public static HomeFragment homeFragment = new HomeFragment();
+    public static ClassListFragment classListFragment = new ClassListFragment();
+    public static HoleFragment holeFragment = new HoleFragment();
+    public static SportFragment sportFragment = new SportFragment();
+    public static ProfileFragment profileFragment = new ProfileFragment();
+
+    // 登录后获取的用户信息，包括用户id，用户nickname和用户email
+    public static Account account;
+
     private int appCount = 0;
     public static Context context;
     public Boolean isSend=false;
@@ -26,9 +43,6 @@ public class MyApplication extends Application {
     public String[] steps={nickname+" step: "+mStep};
     public List<String> stepList= new ArrayList<>(Arrays.asList(steps));
     public Boolean isUpdate=false;
-
-
-
 
     @Override
     public void onCreate() {
