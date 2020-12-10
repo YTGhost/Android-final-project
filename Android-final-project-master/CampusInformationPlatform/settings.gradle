@@ -1,0 +1,2 @@
+include ':app', ':lib-todaystepcounter', ':base-lib-notification', ':lib-jlogger'
+rootProject.name = "Campus-Information-Platform"
