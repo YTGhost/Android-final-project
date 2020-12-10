@@ -34,15 +34,12 @@ public class MyApplication extends Application {
 
     // 登录后获取的用户信息，包括用户id，用户nickname和用户email
     public static Account account;
-
-    private int appCount = 0;
+    //当前用户步数
+    public static int step;
+    //判断当前应用是否处于前台
+    private static int appCount = 0;
     public static Context context;
-    public Boolean isSend=false;
-    public String nickname="ljz";
-    public int mStep=0;
-    public String[] steps={nickname+" step: "+mStep};
-    public List<String> stepList= new ArrayList<>(Arrays.asList(steps));
-    public Boolean isUpdate=false;
+
 
     @Override
     public void onCreate() {
