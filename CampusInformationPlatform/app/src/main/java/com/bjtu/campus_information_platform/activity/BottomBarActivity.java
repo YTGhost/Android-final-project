@@ -44,7 +44,7 @@ public class BottomBarActivity extends AppCompatActivity {
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new ClassListFragment());
         mFragmentList.add(new HoleFragment());
-        mFragmentList.add(new SportFragment());
+        mFragmentList.add(new SportFragment(this));
         mFragmentList.add(new ProfileFragment());
 
         // 设置适配器
