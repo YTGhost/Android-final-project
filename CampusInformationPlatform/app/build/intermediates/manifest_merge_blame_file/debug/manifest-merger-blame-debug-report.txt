@@ -1,0 +1,178 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.bjtu.campus_information_platform"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:6:5-66
+11-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:6:22-64
+12    <!-- 检测网络状态权限 -->
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:8:5-78
+13-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:8:22-76
+14
+15    <!-- 在SDCard中创建与删除文件权限 -->
+16    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+16-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:11:5-12:46
+16-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:11:22-81
+17    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+17-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:13:5-14:46
+17-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:13:22-70
+18    <!-- 往SDCard写入数据权限 -->
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+19-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:16:5-80
+19-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:16:22-78
+20    <!-- 从SDCard读取数据权限 -->
+21    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+21-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:18:5-79
+21-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:18:22-77
+22    <!-- 发起foreground权限 -->
+23    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+23-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:20:5-77
+23-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:20:22-74
+24    <!-- 读取用户健康数据权限 -->
+25    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+25-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:22:5-79
+25-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:22:22-76
+26    <uses-permission android:name="android.permission.WAKE_LOCK" />
+26-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-68
+26-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-65
+27    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+27-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-81
+27-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-78
+28    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" /> <!-- 协处理器计步权限 -->
+28-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-85
+28-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-82
+29    <uses-feature
+29-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:5-20:35
+30        android:name="android.hardware.sensor.stepcounter"
+30-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:9-59
+31        android:required="true" />
+31-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:9-32
+32    <uses-feature
+32-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:5-23:35
+33        android:name="android.hardware.sensor.stepdetector"
+33-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-60
+34        android:required="true" />
+34-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:9-32
+35
+36    <application
+36-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:23:5-40:19
+37        android:name="com.bjtu.campus_information_platform.activity.MyApplication"
+37-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:24:9-47
+38        android:allowBackup="true"
+38-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:25:9-35
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.3.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\c560b8721f05ca12656603dd382025ab\core-1.3.1\AndroidManifest.xml:24:18-86
+40        android:debuggable="true"
+41        android:extractNativeLibs="false"
+42        android:icon="@mipmap/ic_launcher"
+42-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:26:9-43
+43        android:label="@string/app_name"
+43-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:27:9-41
+44        android:roundIcon="@mipmap/ic_launcher_round"
+44-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:28:9-54
+45        android:supportsRtl="true"
+45-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:29:9-35
+46        android:testOnly="true"
+47        android:theme="@style/Theme.CampusInformationPlatform" >
+47-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:30:9-63
+48        <activity android:name="com.bjtu.campus_information_platform.activity.BottomBarActivity" />
+48-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:31:9-64
+48-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:31:19-61
+49        <activity android:name="com.bjtu.campus_information_platform.activity.RegisterActivity" />
+49-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:32:9-62
+49-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:32:19-60
+50        <activity android:name="com.bjtu.campus_information_platform.activity.MainActivity" >
+50-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:33:9-39:20
+50-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:33:19-56
+51            <intent-filter>
+51-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:34:13-38:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:35:17-69
+52-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:35:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:37:17-77
+54-->D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\app\src\main\AndroidManifest.xml:37:27-74
+55            </intent-filter>
+56        </activity>
+57        <!-- 计步Service -->
+58        <service
+58-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:9-46:19
+59            android:name="com.today.step.lib.TodayStepService"
+59-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-63
+60            android:enabled="true"
+60-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-35
+61            android:exported="false"
+61-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-37
+62            android:launchMode="singleInstance"
+62-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:13-48
+63            android:priority="1000"
+63-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:13-36
+64            android:process=":todaystep" >
+64-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-41
+65            <intent-filter>
+65-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:13-45:29
+66
+67                <!-- 系统启动完成后会调用 -->
+68                <action android:name="android.intent.action.BOOT_COMPLETED" />
+68-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:17-79
+68-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:25-76
+69                <action android:name="android.intent.action.DATE_CHANGED" />
+69-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:17-77
+69-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:25-74
+70                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+70-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:17-78
+70-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:25-75
+71                <action android:name="android.intent.action.USER_PRESENT" />
+71-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:17-77
+71-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:25-74
+72                <action android:name="android.intent.action.ACTION_TIME_TICK" />
+72-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:17-81
+72-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:25-78
+73                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+73-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:17-87
+73-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:25-84
+74                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+74-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:17-90
+74-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:25-87
+75            </intent-filter>
+76        </service> <!-- 开机自启动 -->
+77        <receiver
+77-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:49:9-56:20
+78            android:name="com.today.step.lib.TodayStepBootCompleteReceiver"
+78-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:50:13-76
+79            android:enabled="true"
+79-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:51:13-35
+80            android:exported="false" >
+80-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:52:13-37
+81            <intent-filter>
+81-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:53:13-55:29
+82                <action android:name="android.intent.action.BOOT_COMPLETED" />
+82-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:17-79
+82-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:25-76
+83            </intent-filter>
+84        </receiver> <!-- 关机广播 -->
+85        <receiver android:name="com.today.step.lib.TodayStepShutdownReceiver" >
+85-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:59:9-65:20
+85-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:59:19-78
+86            <intent-filter>
+86-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:60:13-64:29
+87
+88                <!-- 关机广播 -->
+89                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+89-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:63:17-80
+89-->[:lib-todaystepcounter] D:\Code\AndroidProject\Android_Final_Project\Android-final-project\CampusInformationPlatform\lib-todaystepcounter\build\intermediates\library_manifest\debug\AndroidManifest.xml:63:25-77
+90            </intent-filter>
+91        </receiver>
+92    </application>
+93
+94</manifest>
