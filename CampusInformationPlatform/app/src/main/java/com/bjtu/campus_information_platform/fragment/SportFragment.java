@@ -33,6 +33,7 @@ import com.today.step.lib.TodayStepManager;
 import com.today.step.lib.TodayStepService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.bjtu.campus_information_platform.activity.MyApplication.getApplication;
@@ -73,6 +74,7 @@ public class SportFragment extends Fragment {
         mListView.addHeaderView(header);
 
         getApplication().steps= (String[]) getApplication().stepList.toArray(new String[0]);
+
 
         adapter = new ArrayAdapter<String>(activity,
                 android.R.layout.simple_expandable_list_item_1,
