@@ -8,8 +8,12 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+/build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
 base-lib-notification/.idea
+base-lib-notification/build
+lib-jlogger/build
+lib-todaystepcounter/build

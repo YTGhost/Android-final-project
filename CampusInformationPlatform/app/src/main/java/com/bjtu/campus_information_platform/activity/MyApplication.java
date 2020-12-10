@@ -24,7 +24,7 @@ public class MyApplication extends Application {
     public String nickname="ljz";
     public int mStep=0;
     public String[] steps={nickname+" step: "+mStep};
-    public List<String> stepList=new ArrayList<>(Arrays.asList(steps));
+    public List<String> stepList= new ArrayList<>(Arrays.asList(steps));
     public Boolean isUpdate=false;
 
 
