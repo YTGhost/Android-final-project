@@ -1,5 +1,6 @@
 package com.bjtu.campus_information_platform.util.network;
 
+import com.bjtu.campus_information_platform.model.Account;
 import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.model.Test;
 import com.google.gson.reflect.TypeToken;
@@ -33,7 +34,7 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void loginRequest(RequestParams params, ResponseCallback callback) {
-        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/login", params, callback, null);
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/login", params, callback, new TypeToken<Account>(){}.getType());
     }
 
     /**

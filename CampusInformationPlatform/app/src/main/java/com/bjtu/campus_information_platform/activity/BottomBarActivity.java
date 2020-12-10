@@ -41,11 +41,12 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView = (BubbleNavigationLinearView) findViewById(R.id.bottom_navigation_view_linear);
 
         // 添加所需的Fragment
-        mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new ClassListFragment());
-        mFragmentList.add(new HoleFragment());
-        mFragmentList.add(new SportFragment(this));
-        mFragmentList.add(new ProfileFragment());
+        mFragmentList.add(MyApplication.homeFragment);
+        mFragmentList.add(MyApplication.classListFragment);
+        mFragmentList.add(MyApplication.holeFragment);
+        mFragmentList.add(MyApplication.sportFragment);
+        mFragmentList.add(MyApplication.profileFragment);
+        MyApplication.sportFragment.setActivity(this);
 
         // 设置适配器
         mAdapter = new ScreenSlidePageFragmentAdapter(getSupportFragmentManager(), mFragmentList);

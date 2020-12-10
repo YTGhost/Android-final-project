@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bjtu.campus_information_platform.R;
+import com.bjtu.campus_information_platform.model.Account;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.OkHttpException;
 import com.bjtu.campus_information_platform.util.network.RequestParams;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             HttpRequest.loginRequest(params, new ResponseCallback() {
                 @Override
                 public void onSuccess(Object responseObj) {
+                    MyApplication.account = (Account) responseObj;
                     loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, () -> {
                         Intent intent = new Intent(getBaseContext(), BottomBarActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
