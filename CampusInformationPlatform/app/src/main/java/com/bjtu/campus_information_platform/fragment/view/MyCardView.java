@@ -32,7 +32,7 @@ public class MyCardView extends ConstraintLayout {
                 reply_time.setText(date);
             }
 
-            String text = attributes.getString(R.styleable.MyCardAttribute_hole_text);
+            String text = attributes.getString(R.styleable.MyCardAttribute_hole_content);
             if (!TextUtils.isEmpty(text)) {
                 reply_content.setText(text);
             }

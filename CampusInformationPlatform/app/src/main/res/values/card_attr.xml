@@ -3,7 +3,7 @@
     <declare-styleable name="MyCardAttribute">
 
         <attr name="hole_date" format="string"/>
-        <attr name="hole_text" format="string"/>
+        <attr name="hole_content" format="string"/>
 
     </declare-styleable>
 
