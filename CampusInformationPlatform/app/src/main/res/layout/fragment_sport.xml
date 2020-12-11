@@ -2,74 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
         android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:text="运动"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="运动"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:text="为祖国健康工作五十年"
-                android:textSize="12sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="为祖国健康工作五十年"
+            android:textSize="12sp" />
 
     </LinearLayout>
+
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/sport_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-
-        <ScrollView
+        <ListView
+            android:id="@+id/step_list_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/sport_scroll_view"
-            android:scrollbars="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_weight="4">
 
-                <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/bg" />
-
-                <com.bjtu.campus_information_platform.fragment.view.MyListView
-                    android:id="@+id/step_list_view"
-                    android:layout_weight="4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </com.bjtu.campus_information_platform.fragment.view.MyListView>
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="已经到底啦"
-                    android:visibility="visible" />
-            </LinearLayout>
-
-
-        </ScrollView>
-
+        </ListView>
 
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 
