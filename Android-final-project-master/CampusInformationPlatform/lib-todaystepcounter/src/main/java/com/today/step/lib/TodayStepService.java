@@ -501,30 +501,30 @@ public class TodayStepService extends Service implements Handler.Callback {
     @SuppressLint("SoonBlockedPrivateApi")
     private void getSensorRate() {
 
-//        Class<?> personType = SensorManager.class;
-//
-//        //访问私有方法
-//        //getDeclaredMethod可以获取到所有方法，而getMethod只能获取public
-//        Method method = null;
-//        try {
-//            method = personType.getDeclaredMethod("getDelay", int.class);
-//            //压制Java对访问修饰符的检查
-//            method.setAccessible(true);
-//            //调用方法;person为所在对象
-//            int rate = (int) method.invoke(null, SAMPLING_PERIOD_US);
-//            Map<String, String> map = getLogMap();
-//            map.put("getSensorRate", String.valueOf(rate));
-//            JLoggerWraper.onEventInfo(this, JLoggerConstant.JLOGGER_SERVICE_SENSORRATE_INVOKE, map);
-//
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        Class<?> personType = SensorManager.class;
+
+        //访问私有方法
+        //getDeclaredMethod可以获取到所有方法，而getMethod只能获取public
+        Method method = null;
+        try {
+            method = personType.getDeclaredMethod("getDelay", int.class);
+            //压制Java对访问修饰符的检查
+            method.setAccessible(true);
+            //调用方法;person为所在对象
+            int rate = (int) method.invoke(null, SAMPLING_PERIOD_US);
+            Map<String, String> map = getLogMap();
+            map.put("getSensorRate", String.valueOf(rate));
+            JLoggerWraper.onEventInfo(this, JLoggerConstant.JLOGGER_SERVICE_SENSORRATE_INVOKE, map);
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

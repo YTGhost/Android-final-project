@@ -7,15 +7,11 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.adapter.ScreenSlidePageFragmentAdapter;
-import com.bjtu.campus_information_platform.fragment.ClassListFragment;
-import com.bjtu.campus_information_platform.fragment.HoleFragment;
-import com.bjtu.campus_information_platform.fragment.HomeFragment;
-import com.bjtu.campus_information_platform.fragment.ProfileFragment;
-import com.bjtu.campus_information_platform.fragment.SportFragment;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
 import java.util.ArrayList;
@@ -47,9 +43,10 @@ public class BottomBarActivity extends AppCompatActivity {
         mFragmentList.add(MyApplication.sportFragment);
         mFragmentList.add(MyApplication.profileFragment);
         MyApplication.sportFragment.setActivity(this);
+        MyApplication.fragmentManager = getSupportFragmentManager();
 
         // 设置适配器
-        mAdapter = new ScreenSlidePageFragmentAdapter(getSupportFragmentManager(), mFragmentList);
+        mAdapter = new ScreenSlidePageFragmentAdapter(MyApplication.fragmentManager, mFragmentList);
         mViewPager.setAdapter(mAdapter);
 
         // viewpager滑动切换并改变导航栏

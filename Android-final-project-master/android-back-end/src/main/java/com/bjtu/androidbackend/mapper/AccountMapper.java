@@ -4,6 +4,7 @@ import com.bjtu.androidbackend.model.Account;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface AccountMapper {
 
     @Insert("insert into account (nickname, email, password) values (#{nickname}, #{email}, #{password})")
     public void register(Account account);
+
+    @Update("update account set password=#{password} where email=#{email}")
+    public void forget(Account account);
 }
