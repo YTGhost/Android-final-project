@@ -77,5 +77,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), RegisterActivity.class);
             startActivity(intent);
         });
+
+        forgetText.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), ForgetActivity.class);
+            startActivity(intent);
+        });
     }
 }

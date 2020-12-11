@@ -38,12 +38,21 @@ public class HttpRequest {
     }
 
     /**
-     * 发送验证码接口
+     * 发送注册验证码接口
      * @param params 入参
      * @param callback 回调接口
      */
-    public static void getCodeRequest(String email, RequestParams params, ResponseCallback callback) {
+    public static void getRegisterCodeRequest(String email, RequestParams params, ResponseCallback callback) {
         RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/getRegisterCode/" + email, params, callback, null);
+    }
+
+    /**
+     * 发送忘记密码验证码接口
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void getForgetCodeRequest(String email, RequestParams params, ResponseCallback callback) {
+        RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/getForgetCode/" + email, params, callback, null);
     }
 
     /**
@@ -79,6 +88,15 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void postStepApi(RequestParams params,ResponseCallback callback){
-        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep",params,callback,new TypeToken<List<Step>>(){}.getType());
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep", params, callback, new TypeToken<List<Step>>(){}.getType());
+    }
+
+    /**
+     * 修改用户密码
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void forgetRequest(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/forget", params, callback, null);
     }
 }

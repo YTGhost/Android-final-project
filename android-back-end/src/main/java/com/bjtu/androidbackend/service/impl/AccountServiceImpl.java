@@ -28,4 +28,9 @@ public class AccountServiceImpl implements AccountService {
     public void register(Account account) {
         accountMapper.register(account);
     }
+
+    @Override
+    public void forget(Account account) {
+        accountMapper.forget(account);
+    }
 }

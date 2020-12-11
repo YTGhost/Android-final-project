@@ -76,6 +76,7 @@ public class AccountController {
                 map.put("data", "");
                 map.put("msg", "验证码错误或已过期");
             }
+            jedis.close();
         } else {
             map.put("code", 1);
             map.put("data", "");
@@ -84,10 +85,18 @@ public class AccountController {
         return map;
     }
 
-    @ApiOperation(value = "发送邮件验证码")
+    @ApiOperation(value = "注册发送邮件验证码")
     @GetMapping(value = "/getRegisterCode/{email}")
     @ResponseBody
     public Map<String, Object> getRegisterCode(@PathVariable(name = "email") String email) {
+        Map<String, Object> map = new HashMap<>();
+        List<Account> list = accountService.loginByEmail(email);
+        if(!list.isEmpty()) {
+            map.put("code", 1);
+            map.put("data", "");
+            map.put("msg", "邮箱已被注册");
+            return map;
+        }
         Random random = new Random();
         StringBuilder verification = new StringBuilder();
         for(int i = 0; i < 6; i++) {
@@ -97,10 +106,66 @@ public class AccountController {
         Jedis jedis = JedisInstance.getInstance().getResource();
         jedis.setex(email, 300, verification.toString());
         jedis.close();
-        Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("data", verification.toString());
         map.put("msg", "验证码发送成功");
+        return map;
+    }
+
+    @ApiOperation(value = "忘记密码发送邮件验证码")
+    @GetMapping(value = "/getForgetCode/{email}")
+    @ResponseBody
+    public Map<String, Object> getForgetCode(@PathVariable(name = "email") String email) {
+        Map<String, Object> map = new HashMap<>();
+        List<Account> list = accountService.loginByEmail(email);
+        if(list.isEmpty()) {
+            map.put("code", 1);
+            map.put("data", "");
+            map.put("msg", "邮箱不存在");
+            return map;
+        }
+        Random random = new Random();
+        StringBuilder verification = new StringBuilder();
+        for(int i = 0; i < 6; i++) {
+            verification.append(random.nextInt(10));
+        }
+        mailService.sendMail(email, "请查收验证码", "您的验证码为：" + verification.toString() + "，请在5分钟内验证。");
+        Jedis jedis = JedisInstance.getInstance().getResource();
+        jedis.setex(email, 300, verification.toString());
+        jedis.close();
+        map.put("code", 0);
+        map.put("data", verification.toString());
+        map.put("msg", "验证码发送成功");
+        return map;
+    }
+
+    @ApiOperation(value = "用户忘记密码")
+    @PostMapping(value = "/forget")
+    @ResponseBody
+    public Map<String, Object> Forget(@RequestBody Account account) {
+        List<Account> list = accountService.loginByEmail(account.getEmail());
+        Map<String, Object> map = new HashMap<>();
+        if(!list.isEmpty()) {
+            String code = account.getCode();
+            Jedis jedis = JedisInstance.getInstance().getResource();
+            // 验证成功
+            if(code.equals(jedis.get(account.getEmail()))) {
+                account.setPassword(BCrypt.withDefaults().hashToString(10, account.getPassword().toCharArray()));
+                accountService.forget(account);
+                map.put("code", 0);
+                map.put("data", "");
+                map.put("msg", "修改密码成功");
+            } else {    // 验证失败
+                map.put("code", 2);
+                map.put("data", "");
+                map.put("msg", "验证码错误或已过期");
+            }
+            jedis.close();
+        } else {
+            map.put("code", 1);
+            map.put("data", "");
+            map.put("msg", "邮箱不存在");
+        }
         return map;
     }
 
