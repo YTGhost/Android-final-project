@@ -12,10 +12,6 @@ import com.bjtu.campus_information_platform.fragment.ProfileFragment;
 import com.bjtu.campus_information_platform.fragment.SportFragment;
 import com.bjtu.campus_information_platform.model.Account;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 
 /*
 * 这里继承Application是为了实现应用程序级的全局变量
