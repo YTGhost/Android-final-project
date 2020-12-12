@@ -62,6 +62,8 @@ public class HoleFragment extends Fragment implements BGARefreshLayout.BGARefres
         img_btn = (ImageButton) view.findViewById(R.id.addHole);
 
         isHoleInit=true;
+        index_oldest = Long.valueOf(-1);    //最晚编号
+        index_newest =  Long.valueOf(-1);   //最新编号
 
         ArrayList<String> boxHint = new ArrayList<>();
         boxHint.add("");
