@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
+        android:layout_marginTop="20dp"
         >
 
         <LinearLayout
@@ -70,35 +71,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.bjtu.campus_information_platform.fragment.view.MyCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    myapp:hole_date="2020/12/12 12:18:12"
-                    myapp:hole_text="加油大三人！"/>
 
-                <com.bjtu.campus_information_platform.fragment.view.MyCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    myapp:hole_date="2020/12/12 12:15:12"
-                    myapp:hole_text="湖人总冠军！"/>
-
-                <com.bjtu.campus_information_platform.fragment.view.MyCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    myapp:hole_date="2020/12/12 12:15:12"
-                    myapp:hole_text="表白软件学院！"/>
-
-                <com.bjtu.campus_information_platform.fragment.view.MyCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    myapp:hole_date="2020/12/12 12:15:12"
-                    myapp:hole_text="大三人大三魂！"/>
-
-                <com.bjtu.campus_information_platform.fragment.view.MyCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    myapp:hole_date="2020/12/12 12:15:12"
-                    myapp:hole_text="詹姆斯MVP！"/>
 
             </LinearLayout>
 

@@ -5,3 +5,4 @@ android-back-end/target
 CampusInformationPlatform/.idea
 .gradle/
 build/
+release/
