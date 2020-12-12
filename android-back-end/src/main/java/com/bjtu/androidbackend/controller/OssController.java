@@ -22,7 +22,7 @@ public class OssController {
     @ApiOperation(value = "上传文件")
     @PostMapping(value = "/upload")
     @ResponseBody
-    public Map<String, Object> upload(MultipartFile file) {
+    public Map<String, Object> upload(@RequestParam("file") MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
         String url = ossService.uploadOssFile(file);
         map.put("code", 0);

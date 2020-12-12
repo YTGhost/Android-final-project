@@ -16,7 +16,7 @@ public interface ClasslistMapper {
     @Insert("insert into course (id, day, startTime, endTime, courseName, room) values (#{id}, #{day}, #{startTime}, #{endTime}, #{courseName}, #{room})")
     public void addCourse(Course course);
 
-    @Select("select * from course where id = #{id} and endTime >= #{endTime} and startTime <= #{endTime} or id = #{id} and startTime <= #{startTime} and endTime >= #{startTime} or id = #{id} and startTime > #{startTime} and endTime < #{endTime}")
+    @Select("select * from course where id = #{id} and day = #{day} and endTime >= #{endTime} and startTime <= #{endTime} or id = #{id} and day = #{day} and startTime <= #{startTime} and endTime >= #{startTime} or id = #{id} and day = #{day} and startTime > #{startTime} and endTime < #{endTime}")
     public List<Course> judgeConflict(Course course);
 
     @Select("select * from course where id = #{id}")
