@@ -234,11 +234,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     userData.put("avatarUrl", list.get(i).getAvatarUrl());
                     data.add(userData);
                 }
-//                List<String> stepsList = new ArrayList<>();
-//                list.forEach(step -> {
-//                    stepsList.add(step.getNickname() + "  steps: " + step.getSteps());
-//                });
-//                String[] steps = (String[]) stepsList.toArray(new String[0]);
+
 
                 listView.setAdapter(new MyListViewAdapter(activity, data));
                 fixListViewHeight(listView);
