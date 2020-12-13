@@ -41,11 +41,11 @@ public class HttpRequest {
     }
 
     /**
-     * 发送验证码接口
+     * 发送注册验证码接口
      * @param params 入参
      * @param callback 回调接口
      */
-    public static void getCodeRequest(String email, RequestParams params, ResponseCallback callback) {
+    public static void getRegisterCodeRequest(String email, RequestParams params, ResponseCallback callback) {
         RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/getRegisterCode/" + email, params, callback, null);
     }
 
