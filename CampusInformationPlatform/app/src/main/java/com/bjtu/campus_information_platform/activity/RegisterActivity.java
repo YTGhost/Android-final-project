@@ -154,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
                 R_emailLayout.setError("邮箱地址非法");
                 return;
             }
-            HttpRequest.getCodeRequest(R_emailInput.getText().toString(), null, new ResponseCallback() {
+            HttpRequest.getRegisterCodeRequest(R_emailInput.getText().toString(), null, new ResponseCallback() {
                 @Override
                 public void onSuccess(Object responseObj) {
                     startTimer();
@@ -162,7 +162,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(OkHttpException failuer) {
-                    Toast.makeText(RegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
+                    if(failuer.getEcode() == 1) {
+                        R_emailLayout.setErrorEnabled(true);
+                        R_emailLayout.setError("邮箱已经被注册");
+                        isEmailOnly = false;
+                    }
                 }
             });
 
@@ -331,7 +335,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * 短信验证码倒计时函数
+     * 验证码倒计时函数
      */
     private void startTimer() {
         codeBtn.setEnabled(false);

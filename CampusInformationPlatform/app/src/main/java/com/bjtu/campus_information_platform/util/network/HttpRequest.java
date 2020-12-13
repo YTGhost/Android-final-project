@@ -2,10 +2,12 @@ package com.bjtu.campus_information_platform.util.network;
 
 import com.bjtu.campus_information_platform.model.Account;
 import com.bjtu.campus_information_platform.model.Hole;
+import com.bjtu.campus_information_platform.model.Course;
 import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.model.Test;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -39,12 +41,21 @@ public class HttpRequest {
     }
 
     /**
-     * 发送验证码接口
+     * 发送注册验证码接口
      * @param params 入参
      * @param callback 回调接口
      */
-    public static void getCodeRequest(String email, RequestParams params, ResponseCallback callback) {
+    public static void getRegisterCodeRequest(String email, RequestParams params, ResponseCallback callback) {
         RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/getRegisterCode/" + email, params, callback, null);
+    }
+
+    /**
+     * 发送忘记密码验证码接口
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void getForgetCodeRequest(String email, RequestParams params, ResponseCallback callback) {
+        RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/getForgetCode/" + email, params, callback, null);
     }
 
     /**
@@ -80,7 +91,16 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void postStepApi(RequestParams params,ResponseCallback callback){
-        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep",params,callback,new TypeToken<List<Step>>(){}.getType());
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep", params, callback, new TypeToken<List<Step>>(){}.getType());
+    }
+
+    /**
+     * 修改用户密码
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void forgetRequest(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/forget", params, callback, null);
     }
 
 
@@ -114,8 +134,60 @@ public class HttpRequest {
         RequestMode.postRequest("https://www.hihia.top/android-back-end-api/hole/addHole",params,callback,null);
     }
 
-
+    /**
+     *查询空闲教室
+     * @param params
+     * @param file
+     * @param callback
+     */
     public static void postClassQueryApi(RequestParams params,ResponseCallback callback){
         RequestMode.postRequest("https://www.hihia.top/android-back-end-api/queryClass/freeroom",params,callback,new TypeToken<List<String>>(){}.getType());
+    }
+  
+    /**
+     * 图片上传服务器
+     * @param params
+     * @param file
+     * @param callback
+     */
+    public static void postMultipartApi(RequestParams params, File file, ResponseCallback callback) {
+        RequestMode.postMultipart("https://www.hihia.top/android-back-end-api/oss/upload", params, file, callback, null);
+    }
+
+    /**
+     * 下载图片 Get方式
+     * @param params 入参
+     * @param imgPath 存储地址
+     * @param callback 回调接口
+     */
+    public static void getImgApi(String url, RequestParams params,String imgPath, ResponseByteCallback callback) {
+        RequestMode.getLoadImg(url, params, imgPath, callback);
+    }
+
+    /**
+     * 更新学生的一条课程记录
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void postClass(RequestParams params,ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/classlist/add",params,callback,null);
+    }
+
+    /**
+     * 删除学生的一条记录
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void deleteClass(RequestParams params,ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/classlist/delete",params,callback,null);
+    }
+
+    /**
+     * 获得学生的所有课程记录
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void getClass(int id,RequestParams params,ResponseCallback callback){
+        RequestMode.getRequest("https://www.hihia.top/android-back-end-api/classlist/"+id,params,callback,new TypeToken<List<Course>>(){}.getType());
     }
 }

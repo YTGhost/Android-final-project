@@ -11,4 +11,8 @@ public interface AccountService {
     public List<Account> loginByNickname(String nickname);
 
     public void register(Account account);
+
+    public void forget(Account account);
+
+    public String getAvatarByNickname(String nickname);
 }

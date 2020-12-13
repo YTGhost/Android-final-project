@@ -1,10 +1,12 @@
 package com.bjtu.androidbackend.controller;
 
 import com.bjtu.androidbackend.model.Step;
+import com.bjtu.androidbackend.service.AccountService;
 import com.bjtu.androidbackend.util.JedisInstance;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
@@ -18,6 +20,10 @@ import java.util.*;
 @RequestMapping("/step")
 @CrossOrigin
 public class StepController {
+
+    @Autowired
+    AccountService accountService;
+
     @ApiOperation(value = "获取用户步数")
     @PostMapping(value = "/getStep")
     @ResponseBody
@@ -25,10 +31,14 @@ public class StepController {
         String stepKey="user-step";
         Jedis jedis= JedisInstance.getInstance().getResource();
 
-        //更新当前用户步数
-        jedis.hset(stepKey,step.getNickname(), String.valueOf(step.getSteps()));
-        int expireTime=getRemainSecondsOneDay(new Date());
-        jedis.expire(stepKey,expireTime);
+        //判断当前用户步数是否大于数据库存储步数，若是更新当前用户步数
+        String userSteps=jedis.hget(stepKey,step.getNickname());
+        if(userSteps == null || step.getSteps() > Integer.parseInt(userSteps)){
+            jedis.hset(stepKey,step.getNickname(), String.valueOf(step.getSteps()));
+            int expireTime=getRemainSecondsOneDay(new Date());
+            jedis.expire(stepKey,expireTime);
+        }
+
 
         //为所有步数排序
         Map<String,String> steps=jedis.hgetAll(stepKey);
@@ -43,8 +53,9 @@ public class StepController {
         //放入数据列表
         List<Step> data=new ArrayList<>();
         list.forEach((i)->{
-            Step userStep=new Step();
+            Step userStep = new Step();
             userStep.setNickname(i.getKey());
+            userStep.setAvatarUrl(accountService.getAvatarByNickname(i.getKey()));
             if(i.getValue()!=null){
                 userStep.setSteps(Integer.parseInt(i.getValue()));
             }else {

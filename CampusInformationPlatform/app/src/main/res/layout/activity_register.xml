@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 app:codes="6"
                 app:hint_color="#77ce9d"
-                app:hint_text="请输入验证码"
+                app:hint_text="   请输入验证码"
                 app:text_color="#b12eff"
                 app:underline_color="#457ad1"
                 app:underline_selected_color="#9e1ace" />

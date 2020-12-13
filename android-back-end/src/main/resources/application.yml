@@ -38,3 +38,11 @@ spring:
 
 server:
   port: 6382
+
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      keyid: LTAI4GGdC1Ekd7eDxJCkzQKS
+      keysecret: TF0c10oRE0XXsar19d6cNROeQr0sVN
+      bucketname: hihia

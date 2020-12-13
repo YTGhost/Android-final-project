@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weekdayList">
+        <item>待输入</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </string-array>
+    <string-array name="classTimeList">
+        <item>待输入</item>
+        <item>第一节</item>
+        <item>第二节</item>
+        <item>第三节</item>
+        <item>第四节</item>
+        <item>第五节</item>
+        <item>第六节</item>
+        <item>第七节</item>
+    </string-array>
+</resources>

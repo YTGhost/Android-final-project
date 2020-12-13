@@ -55,6 +55,11 @@ dependencies {
     implementation 'com.royrodriguez:transitionbutton:0.2.0'    // 登录加载按钮
     implementation(name: 'CodeInput-1.1', ext: 'aar')
     implementation project(path: ':lib-todaystepcounter')
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    implementation project(path: ':lib-todaystepcounter')
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

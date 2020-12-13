@@ -20,6 +20,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!-- 读取用户健康数据权限 -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <!-- 读取用户相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- 读写SD卡权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:name=".activity.MyApplication"
         android:allowBackup="true"
@@ -27,9 +33,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.CampusInformationPlatform">
         <activity android:name=".activity.BottomBarActivity" />
         <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.ForgetActivity"/>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +45,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="新建课程"
+            android:name=".activity.AddCourseActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+
+        <activity
+            android:label="设置中心"
+            android:name=".activity.ProfileMySetting" />
+
+        <activity
+            android:label="发布历史"
+            android:name=".activity.ProfileHistory" />
+
+        <activity
+            android:label="关于"
+            android:name=".activity.ProfileAbout" />
     </application>
 
 </manifest>

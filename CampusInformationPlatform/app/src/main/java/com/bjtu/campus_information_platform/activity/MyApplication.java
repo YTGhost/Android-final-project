@@ -5,6 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.bjtu.campus_information_platform.fragment.ClassListFragment;
 import com.bjtu.campus_information_platform.fragment.HoleFragment;
 import com.bjtu.campus_information_platform.fragment.HomeFragment;
@@ -27,6 +29,7 @@ public class MyApplication extends Application {
     public static HoleFragment holeFragment = new HoleFragment();
     public static SportFragment sportFragment = new SportFragment();
     public static ProfileFragment profileFragment = new ProfileFragment();
+    public static FragmentManager fragmentManager;
 
     // 登录后获取的用户信息，包括用户id，用户nickname和用户email
     public static Account account;
