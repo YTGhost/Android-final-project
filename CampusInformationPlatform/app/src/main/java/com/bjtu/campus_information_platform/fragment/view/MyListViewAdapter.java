@@ -1,7 +1,6 @@
 package com.bjtu.campus_information_platform.fragment.view;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
@@ -11,11 +10,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.bjtu.campus_information_platform.R;
-import com.bjtu.campus_information_platform.activity.MainActivity;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.ResponseByteCallback;
 
@@ -25,12 +21,12 @@ import java.util.Map;
 
 public class MyListViewAdapter extends BaseAdapter {
 
-    public List<Map<String,String>> list;
+    public List<Map<String, String>> list;
     public Context context;
 
     public MyListViewAdapter(Context context, List<Map<String, String>> data) {
-        this.context=context;
-        this.list=data;
+        this.context = context;
+        this.list = data;
     }
 
     @Override
@@ -60,53 +56,31 @@ public class MyListViewAdapter extends BaseAdapter {
         viewHolder.steps = (TextView) convertView.findViewById(R.id.steps);
         viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
 
-
         String url = list.get(position).get("avatarUrl");
-        if(url==null){
-            url="https://hihia.oss-cn-beijing.aliyuncs.com/2020/12/13/4839513ad2b54517900059ca8cc503cbWechatIMG1001.png";
-            HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
-                @Override
-                public void onSuccess(File file) {
-                    viewHolder.nickname.setText(list.get(position).get("nickname"));
-                    viewHolder.rank.setText(list.get(position).get("rank"));
-                    viewHolder.steps.setText(list.get(position).get("steps"));
-                    Log.e("TAG", "图片下载成功="+file.getAbsolutePath());
-                    viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
-                }
-                @Override
-                public void onFailure(String failureMsg) {
-                    viewHolder.nickname.setText(list.get(position).get("nickname"));
-                    viewHolder.rank.setText(list.get(position).get("rank"));
-                    viewHolder.steps.setText(list.get(position).get("steps"));
-                    viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
-                }
-            });
-        }else{
-            HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
-                @Override
-                public void onSuccess(File file) {
-                    viewHolder.nickname.setText(list.get(position).get("nickname"));
-                    viewHolder.rank.setText(list.get(position).get("rank"));
-                    viewHolder.steps.setText(list.get(position).get("steps"));
-                    Log.e("TAG", "图片下载成功="+file.getAbsolutePath());
-                    viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
-                }
-                @Override
-                public void onFailure(String failureMsg) {
-                    viewHolder.nickname.setText(list.get(position).get("nickname"));
-                    viewHolder.rank.setText(list.get(position).get("rank"));
-                    viewHolder.steps.setText(list.get(position).get("steps"));
-                    viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
-                }
-            });
-        }
 
+        HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+            @Override
+            public void onSuccess(File file) {
+                viewHolder.nickname.setText(list.get(position).get("nickname"));
+                viewHolder.rank.setText(list.get(position).get("rank"));
+                viewHolder.steps.setText(list.get(position).get("steps"));
+                Log.e("TAG", "图片下载成功=" + file.getAbsolutePath());
+                viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+            }
 
+            @Override
+            public void onFailure(String failureMsg) {
+                viewHolder.nickname.setText(list.get(position).get("nickname"));
+                viewHolder.rank.setText(list.get(position).get("rank"));
+                viewHolder.steps.setText(list.get(position).get("steps"));
+                viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
+            }
+        });
 
         return convertView;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         ImageView avatar;
         TextView rank;
         TextView nickname;
