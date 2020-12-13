@@ -13,6 +13,9 @@ public class Step implements Serializable{
     @ApiModelProperty(name = "steps",value="步数",required = false)
     private int steps;
 
+    @ApiModelProperty(name = "avatarUrl", value = "头像", required = false)
+    private String avatarUrl;
+
     public String getNickname() {
         return nickname;
     }
@@ -29,11 +32,20 @@ public class Step implements Serializable{
         this.steps = steps;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     @Override
     public String toString() {
         return "Step{" +
                 "nickname='" + nickname + '\'' +
                 ", steps=" + steps +
+                ", avatarUrl='" + avatarUrl + '\'' +
                 '}';
     }
 }
