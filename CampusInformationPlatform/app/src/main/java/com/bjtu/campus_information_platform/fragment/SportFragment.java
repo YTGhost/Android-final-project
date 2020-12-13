@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -32,6 +33,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.activity.MyApplication;
+import com.bjtu.campus_information_platform.fragment.view.MyListViewAdapter;
 import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.OkHttpException;
@@ -42,14 +44,18 @@ import com.today.step.lib.TodayStepManager;
 import com.today.step.lib.TodayStepService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Timer;
 
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder;
 
+import static com.bjtu.campus_information_platform.activity.MyApplication.context;
 import static com.bjtu.campus_information_platform.activity.MyApplication.getApplication;
 
-public class SportFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class SportFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private Activity activity;
 
     private BGARefreshLayout mRefreshLayout;
@@ -57,19 +63,20 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     private ListView listView;
     ImageView mImageView;
     TextView mTextView;
-    //private MyScrollView scrollView;
     //循环取当前时刻的步数中间的间隔时间
     private long TIME_INTERVAL_REFRESH = 3000;
     private Handler mDelayHandler = new Handler(new TodayStepCounterCall());
-    private int mStepSum=0;
+    private int mStepSum = 0;
     private static final int REFRESH_STEP_WHAT = 0;
     private ISportStepInterface iSportStepInterface;
-
-    private Handler mHandler=new Handler();
+    private CountDownTimer countDownTimer;
+    private Handler mHandler = new Handler();
 
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
+
+    private Boolean isFinished = true;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -80,12 +87,12 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         TodayStepManager.startTodayStepService(getApplication());
 
 
-        listView=view.findViewById(R.id.step_list_view);
-        View header=LayoutInflater.from(activity).inflate(R.layout.listview_header,null);
-        mImageView=(ImageView)header.findViewById(R.id.layout_header_image);
+        listView = view.findViewById(R.id.step_list_view);
+        View header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
+        mImageView = (ImageView) header.findViewById(R.id.layout_header_image);
         listView.addHeaderView(header);
-        View footer=LayoutInflater.from(activity).inflate(R.layout.listview_footer,null);
-        mTextView=(TextView)footer.findViewById(R.id.footer_text);
+        View footer = LayoutInflater.from(activity).inflate(R.layout.listview_footer, null);
+        mTextView = (TextView) footer.findViewById(R.id.footer_text);
         listView.addFooterView(footer);
         initRefreshLayout();
         beginRefreshing();
@@ -103,13 +110,14 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 iSportStepInterface = ISportStepInterface.Stub.asInterface(service);
                 try {
                     mStepSum = iSportStepInterface.getCurrentTimeSportStep();
-                    MyApplication.step=mStepSum;
+                    MyApplication.step = mStepSum;
                     updateStepCount();
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
                 mDelayHandler.sendEmptyMessageDelayed(REFRESH_STEP_WHAT, TIME_INTERVAL_REFRESH);
             }
+
             @Override
             public void onServiceDisconnected(ComponentName name) {
 
@@ -169,7 +177,8 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 break;
         }
     }
-    private void initRefreshLayout(){
+
+    private void initRefreshLayout() {
         mRefreshLayout = findView(view, R.id.sport_refresh_layout);
         mRefreshLayout.setDelegate(this);
         BGAStickinessRefreshViewHolder refreshViewHolder = new BGAStickinessRefreshViewHolder(this.getActivity(), true);
@@ -181,7 +190,21 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        beginRefreshing();
+        if (isFinished) {
+            beginRefreshing();
+            isFinished = false;
+            countDownTimer = new CountDownTimer(5000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    //Log.e("LJZ", "1s is gone!");
+                }
+
+                @Override
+                public void onFinish() {
+                    isFinished = true;
+                }
+            };
+        }
     }
 
     @Override
@@ -189,37 +212,41 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         beginLoadingMore();
         return true;
     }
+
     // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在activity的onStart方法中调用，自动进入正在刷新状态获取最新数据
     public void beginRefreshing() {
         RequestParams params = new RequestParams();
         params.put("nickname", MyApplication.account.getNickname());
         params.put("steps", String.valueOf(mStepSum));
-        MyApplication.step=mStepSum;
+        MyApplication.step = mStepSum;
         Log.e("ljz", "start request");
         HttpRequest.postStepApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
 
                 List<Step> list = (List<Step>) responseObj;
-                List<String> stepsList = new ArrayList<>();
-                list.forEach(step -> {
-                    stepsList.add(step.getNickname() + "  steps: " + step.getSteps());
-                });
-                String[] steps = (String[]) stepsList.toArray(new String[0]);
+                List<Map<String, String>> data = new ArrayList<>();
+                for (int i = 0; i < list.size(); i++) {
+                    Map<String, String> userData = new HashMap<>();
+                    userData.put("nickname", list.get(i).getNickname());
+                    userData.put("rank", String.valueOf(i + 1));
+                    userData.put("steps", String.valueOf(list.get(i).getSteps()));
+                    userData.put("avatarUrl", list.get(i).getAvatarUrl());
+                    data.add(userData);
+                }
 
-                listView.setAdapter(new ArrayAdapter<String>(activity,
-                        android.R.layout.simple_expandable_list_item_1,
-                        steps
-                ));
+
+                listView.setAdapter(new MyListViewAdapter(activity, data));
                 fixListViewHeight(listView);
                 mRefreshLayout.endRefreshing();
+                isFinished = true;
             }
 
             @Override
             public void onFailure(OkHttpException failuer) {
                 Log.e("ljz", "failed");
-                String[] steps=new String[1];
-                steps[0]=MyApplication.account.getNickname()+"  steps: "+0;
+                String[] steps = new String[1];
+                steps[0] = MyApplication.account.getNickname() + "  steps: " + 0;
 
             }
 
@@ -235,7 +262,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
             return;
         }
         for (int index = 0, len = listAdapter.getCount(); index < len; index++) {
-            View listViewItem = listAdapter.getView(index , null, listView);
+            View listViewItem = listAdapter.getView(index, null, listView);
             // 计算子项View 的宽高
             listViewItem.measure(0, 0);
             // 计算所有子项的高度和
@@ -245,16 +272,16 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         // listView.getDividerHeight()获取子项间分隔符的高度
         // params.height设置ListView完全显示需要的高度
-        params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
 
     // 通过代码方式控制进入加载更多状态
     public void beginLoadingMore() {
-        mHandler.post(()->mRefreshLayout.endLoadingMore());
+        mHandler.post(() -> mRefreshLayout.endLoadingMore());
     }
 
-    public <VT> VT findView(View rootView,int resId){
+    public <VT> VT findView(View rootView, int resId) {
         VT t = (VT) rootView.findViewById(resId);
         return t;
     }
@@ -276,7 +303,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                         }
                         if (mStepSum != step) {
                             mStepSum = step;
-                            MyApplication.step=mStepSum;
+                            MyApplication.step = mStepSum;
                             updateStepCount();
                         }
                     }

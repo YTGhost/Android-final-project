@@ -7,25 +7,27 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+
             android:text="运动"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="为祖国健康工作五十年"
-            android:textSize="12sp" />
+            android:textSize="10dp" />
 
     </LinearLayout>
 
