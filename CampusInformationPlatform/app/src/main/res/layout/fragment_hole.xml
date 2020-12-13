@@ -15,9 +15,11 @@
 
         <ImageButton
             android:id="@+id/addHole"
-            android:layout_width="70px"
-            android:layout_height="70px"
+            android:layout_marginTop="10dp"
+            android:layout_width="80px"
+            android:layout_height="80px"
             android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:background="@drawable/newhole"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,19 +50,6 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_marginTop="20dp"
-        >
-
-
-    </LinearLayout>
-
-
-
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_hole_refresh"
         android:layout_width="match_parent"
@@ -84,8 +73,6 @@
 
 
             </LinearLayout>
-
-
 
 
         </ScrollView>
