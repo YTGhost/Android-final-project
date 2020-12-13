@@ -41,9 +41,9 @@ public class MyOkHttpClient {
                 //为构建者设置超时时间
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(TIME_OUT, TimeUnit.SECONDS);
                 //设置缓存
-                .cache(new Cache(cacheDir.getAbsoluteFile(), cacheSize));
+//                .cache(new Cache(cacheDir.getAbsoluteFile(), cacheSize));
 
         okHttpClient = okHttpBuilder.build();
     }

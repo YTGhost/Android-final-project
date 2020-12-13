@@ -33,4 +33,9 @@ public class AccountServiceImpl implements AccountService {
     public void forget(Account account) {
         accountMapper.forget(account);
     }
+
+    @Override
+    public String getAvatarByNickname(String nickname) {
+        return accountMapper.getAvatarByNickname(nickname);
+    }
 }
