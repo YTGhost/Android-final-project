@@ -1,13 +1,7 @@
 package com.bjtu.campus_information_platform.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,26 +13,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.activity.MyApplication;
 
 import com.bjtu.campus_information_platform.activity.ProfileAbout;
-import com.bjtu.campus_information_platform.activity.ProfileHistory;
 import com.bjtu.campus_information_platform.activity.ProfileMySetting;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 
 import android.widget.Toast;
-
-
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -53,7 +38,6 @@ public class ProfileFragment extends Fragment {
     private TextView user_id;
 
     LinearLayout linearLayoutSet;
-    LinearLayout linearLayoutHis;
     LinearLayout linearLayoutUpd;
     LinearLayout linearLayoutAbt;
 
@@ -66,7 +50,6 @@ public class ProfileFragment extends Fragment {
             View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
             linearLayoutSet = (LinearLayout) view.findViewById(R.id.set);
-            linearLayoutHis = (LinearLayout) view.findViewById(R.id.history);
             linearLayoutUpd = (LinearLayout) view.findViewById(R.id.update);
             linearLayoutAbt = (LinearLayout) view.findViewById(R.id.about);
 
@@ -103,15 +86,6 @@ public class ProfileFragment extends Fragment {
                 }
             });
 
-
-        linearLayoutHis.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent = new Intent(getActivity(), ProfileHistory.class);
-                    startActivity(intent);
-                }
-            });
 
         linearLayoutUpd.setOnClickListener(new View.OnClickListener() {
                 @Override

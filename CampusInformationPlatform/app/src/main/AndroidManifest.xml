@@ -55,10 +55,6 @@
             android:name=".activity.ProfileMySetting" />
 
         <activity
-            android:label="发布历史"
-            android:name=".activity.ProfileHistory" />
-
-        <activity
             android:label="关于"
             android:name=".activity.ProfileAbout" />
     </application>
