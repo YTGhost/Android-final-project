@@ -6,6 +6,7 @@ import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.model.Test;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -130,5 +131,25 @@ public class HttpRequest {
 
     public static void postHoleAddHoleApi(RequestParams params,ResponseCallback callback){
         RequestMode.postRequest("https://www.hihia.top/android-back-end-api/hole/addHole",params,callback,null);
+    }
+
+    /**
+     * 图片上传服务器
+     * @param params
+     * @param file
+     * @param callback
+     */
+    public static void postMultipartApi(RequestParams params, File file, ResponseCallback callback) {
+        RequestMode.postMultipart("https://www.hihia.top/android-back-end-api/oss/upload", params, file, callback, null);
+    }
+
+    /**
+     * 下载图片 Get方式
+     * @param params 入参
+     * @param imgPath 存储地址
+     * @param callback 回调接口
+     */
+    public static void getImgApi(String url, RequestParams params,String imgPath, ResponseByteCallback callback) {
+        RequestMode.getLoadImg(url, params, imgPath, callback);
     }
 }
