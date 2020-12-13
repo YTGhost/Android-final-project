@@ -113,4 +113,9 @@ public class HttpRequest {
     public static void postHoleAddHoleApi(RequestParams params,ResponseCallback callback){
         RequestMode.postRequest("https://www.hihia.top/android-back-end-api/hole/addHole",params,callback,null);
     }
+
+
+    public static void postClassQueryApi(RequestParams params,ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/queryClass/freeroom",params,callback,new TypeToken<List<String>>(){}.getType());
+    }
 }

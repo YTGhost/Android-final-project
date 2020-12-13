@@ -68,4 +68,5 @@ dependencies {
         maven { url 'https://jitpack.io' }
     }
     implementation 'com.github.searchy2:CustomAlertViewDialogue:2.6.1'
+    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 }
