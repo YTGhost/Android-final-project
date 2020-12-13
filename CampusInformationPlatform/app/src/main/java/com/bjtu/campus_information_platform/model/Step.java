@@ -3,6 +3,15 @@ package com.bjtu.campus_information_platform.model;
 public class Step {
     private String nickname;
     private int steps;
+    private String avatarUrl;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
     public String getNickname() {
         return nickname;

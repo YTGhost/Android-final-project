@@ -65,25 +65,34 @@ public class MyListViewAdapter extends BaseAdapter {
 //            viewHolder=(ViewHolder)convertView.getTag();
 //        }
 
-        viewHolder.nickname.setText(list.get(position).get("nickname"));
-        viewHolder.rank.setText(list.get(position).get("rank"));
-        viewHolder.steps.setText(list.get(position).get("steps"));
-        String url="https://hihia.oss-cn-beijing.aliyuncs.com/2020/12/13/6eea231a93b64365ba3c74fbcaa076caavatar.jpg";
-        HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
-            @Override
-            public void onSuccess(File file) {
 
-                Log.e("TAG", "图片下载成功="+file.getAbsolutePath());
-                viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
-            }
 
-            @Override
-            public void onFailure(String failureMsg) {
-                Log.e("LJZ","图片下载失败");
-                viewHolder.avatar.setImageResource(R.drawable.bg);
-                //viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
-            }
-        });
+        String url=list.get(position).get("avatarUrl");
+        if(url==null){
+            viewHolder.nickname.setText(list.get(position).get("nickname"));
+            viewHolder.rank.setText(list.get(position).get("rank"));
+            viewHolder.steps.setText(list.get(position).get("steps"));
+            viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
+        }else{
+            HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+                @Override
+                public void onSuccess(File file) {
+                    viewHolder.nickname.setText(list.get(position).get("nickname"));
+                    viewHolder.rank.setText(list.get(position).get("rank"));
+                    viewHolder.steps.setText(list.get(position).get("steps"));
+                    Log.e("TAG", "图片下载成功="+file.getAbsolutePath());
+                    viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+                }
+                @Override
+                public void onFailure(String failureMsg) {
+                    viewHolder.nickname.setText(list.get(position).get("nickname"));
+                    viewHolder.rank.setText(list.get(position).get("rank"));
+                    viewHolder.steps.setText(list.get(position).get("steps"));
+                    viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
+                }
+            });
+        }
+
         return convertView;
     }
 

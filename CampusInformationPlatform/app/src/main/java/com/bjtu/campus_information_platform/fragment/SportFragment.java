@@ -210,7 +210,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     userData.put("nickname",list.get(i).getNickname());
                     userData.put("rank", String.valueOf(i+1));
                     userData.put("steps", String.valueOf(list.get(i).getSteps()));
-                    userData.put("avatar","avatar_url");
+                    userData.put("avatarUrl",list.get(i).getAvatarUrl());
                     data.add(userData);
                 }
 //                List<String> stepsList = new ArrayList<>();
