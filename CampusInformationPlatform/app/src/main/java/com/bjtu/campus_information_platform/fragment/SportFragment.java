@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.activity.MyApplication;
+import com.bjtu.campus_information_platform.fragment.view.MyListViewAdapter;
 import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.OkHttpException;
@@ -42,11 +43,14 @@ import com.today.step.lib.TodayStepManager;
 import com.today.step.lib.TodayStepService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder;
 
+import static com.bjtu.campus_information_platform.activity.MyApplication.context;
 import static com.bjtu.campus_information_platform.activity.MyApplication.getApplication;
 
 public class SportFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
@@ -57,7 +61,6 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     private ListView listView;
     ImageView mImageView;
     TextView mTextView;
-    //private MyScrollView scrollView;
     //循环取当前时刻的步数中间的间隔时间
     private long TIME_INTERVAL_REFRESH = 3000;
     private Handler mDelayHandler = new Handler(new TodayStepCounterCall());
@@ -201,16 +204,22 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
             public void onSuccess(Object responseObj) {
 
                 List<Step> list = (List<Step>) responseObj;
-                List<String> stepsList = new ArrayList<>();
-                list.forEach(step -> {
-                    stepsList.add(step.getNickname() + "  steps: " + step.getSteps());
-                });
-                String[] steps = (String[]) stepsList.toArray(new String[0]);
+                List<Map<String,String>> data=new ArrayList<>();
+                for (int i = 0; i < list.size(); i++) {
+                    Map<String,String> userData=new HashMap<>();
+                    userData.put("nickname",list.get(i).getNickname());
+                    userData.put("rank", String.valueOf(i+1));
+                    userData.put("steps", String.valueOf(list.get(i).getSteps()));
+                    userData.put("avatar","avatar_url");
+                    data.add(userData);
+                }
+//                List<String> stepsList = new ArrayList<>();
+//                list.forEach(step -> {
+//                    stepsList.add(step.getNickname() + "  steps: " + step.getSteps());
+//                });
+//                String[] steps = (String[]) stepsList.toArray(new String[0]);
 
-                listView.setAdapter(new ArrayAdapter<String>(activity,
-                        android.R.layout.simple_expandable_list_item_1,
-                        steps
-                ));
+                listView.setAdapter(new MyListViewAdapter(activity,data));
                 fixListViewHeight(listView);
                 mRefreshLayout.endRefreshing();
             }
