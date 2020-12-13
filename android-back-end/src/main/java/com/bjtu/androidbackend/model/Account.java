@@ -23,6 +23,12 @@ public class Account implements Serializable {
     @ApiModelProperty(name = "code", value = "校验码", required = false)
     private String code;
 
+    @ApiModelProperty(name = "avatarUrl", value = "头像地址", required = false)
+    private String avatarUrl;
+
+    @ApiModelProperty(name = "backgroudUrl", value = "背景图地址", required = false)
+    private String backgroudUrl;
+
     public Integer getId() {
         return id;
     }
@@ -61,6 +67,22 @@ public class Account implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getBackgroudUrl() {
+        return backgroudUrl;
+    }
+
+    public void setBackgroudUrl(String backgroudUrl) {
+        this.backgroudUrl = backgroudUrl;
     }
 
     @Override

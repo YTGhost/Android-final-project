@@ -47,27 +47,27 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-            View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-            linearLayoutSet = (LinearLayout) view.findViewById(R.id.set);
-            linearLayoutUpd = (LinearLayout) view.findViewById(R.id.update);
-            linearLayoutAbt = (LinearLayout) view.findViewById(R.id.about);
+        linearLayoutSet = (LinearLayout) view.findViewById(R.id.set);
+        linearLayoutUpd = (LinearLayout) view.findViewById(R.id.update);
+        linearLayoutAbt = (LinearLayout) view.findViewById(R.id.about);
 
-            headImageView = (ImageView) view.findViewById(R.id.h_head);
-            backImageView = (ImageView) view.findViewById(R.id.h_back);
-            user_name = (TextView) view.findViewById(R.id.user_name);
-            user_id = (TextView) view.findViewById(R.id.user_id);
+        headImageView = (ImageView) view.findViewById(R.id.h_head);
+        backImageView = (ImageView) view.findViewById(R.id.h_back);
+        user_name = (TextView) view.findViewById(R.id.user_name);
+        user_id = (TextView) view.findViewById(R.id.user_id);
 
-            //初始头像和背景
+        //初始头像和背景
 
 
-        Glide.with(MyApplication.context).load(MyApplication.account.getUserBackground())
-                    .bitmapTransform(new BlurTransformation(getActivity(), 25), new CenterCrop(getActivity()))
-                    .into(backImageView);
+        Glide.with(MyApplication.context).load(MyApplication.account.getBackgroudUrl())
+                .bitmapTransform(new BlurTransformation(getActivity(), 25), new CenterCrop(getActivity()))
+                .into(backImageView);
 
-        Glide.with(MyApplication.context).load(MyApplication.account.getUserPhoto())
-                    .bitmapTransform(new CropCircleTransformation(getActivity()))
-                    .into(headImageView);
+        Glide.with(MyApplication.context).load(MyApplication.account.getAvatarUrl())
+                .bitmapTransform(new CropCircleTransformation(getActivity()))
+                .into(headImageView);
 /*
 但不知道为什么换完背景和头像Glide框架效果就消失了
  */
@@ -119,8 +119,8 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
         user_name.setText(MyApplication.account.getNickname());
         user_id.setText(String.valueOf(MyApplication.account.getId()));
 
-        backImageView.setImageBitmap(MyApplication.account.getUserBackground());
-        headImageView.setImageBitmap(MyApplication.account.getUserPhoto());
+//        backImageView.setImageBitmap(MyApplication.account.getUserBackground());
+//        headImageView.setImageBitmap(MyApplication.account.getUserPhoto());
         }
     }
 }

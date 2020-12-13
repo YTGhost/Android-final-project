@@ -257,12 +257,12 @@ public class ProfileMySetting extends AppCompatActivity {
         if (requestCode == SELECT_PICTURE) {
 
             handle(resultCode, data);
-            MyApplication.account.setUserPhoto(bitmap);
+//            MyApplication.account.setUserPhoto(bitmap);
             /*更改用户头像*/
 
         } else if(requestCode==SELECT_BACKGROUND){
             handle(resultCode, data);
-            MyApplication.account.setUserBackground(bitmap);
+//            MyApplication.account.setUserBackground(bitmap);
             /*更改用户背景*/
         }
 

@@ -1,6 +1,5 @@
 package com.bjtu.campus_information_platform.model;
 
-import android.graphics.Bitmap;
 
 public class Account {
 
@@ -10,9 +9,9 @@ public class Account {
 
     private String email;
 
-    private Bitmap UserPhoto;
+    private String avatarUrl;
 
-    private Bitmap UserBackground;
+    private String backgroudUrl;
 
     public Integer getId() {
         return id;
@@ -38,20 +37,20 @@ public class Account {
         this.email = email;
     }
 
-    public Bitmap getUserPhoto() {
-        return UserPhoto;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setUserPhoto(Bitmap userPhoto) {
-        UserPhoto = userPhoto;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
-    public Bitmap getUserBackground() {
-        return UserBackground;
+    public String getBackgroudUrl() {
+        return backgroudUrl;
     }
 
-    public void setUserBackground(Bitmap userBackground) {
-        UserBackground = userBackground;
+    public void setBackgroudUrl(String backgroudUrl) {
+        this.backgroudUrl = backgroudUrl;
     }
 
     @Override
@@ -60,8 +59,8 @@ public class Account {
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
-                ", UserPhoto=" + UserPhoto +
-                ", UserBackground=" + UserBackground +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", backgroudUrl='" + backgroudUrl + '\'' +
                 '}';
     }
 }

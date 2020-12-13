@@ -67,6 +67,8 @@ public class AccountController {
             // 验证成功
             if(code.equals(jedis.get(account.getEmail()))) {
                 account.setPassword(BCrypt.withDefaults().hashToString(10, account.getPassword().toCharArray()));
+                account.setAvatarUrl("https://hihia.oss-cn-beijing.aliyuncs.com/2020/12/13/4839513ad2b54517900059ca8cc503cbWechatIMG1001.png");
+                account.setBackgroudUrl("https://hihia.oss-cn-beijing.aliyuncs.com/2020/12/13/8a08025711fe4bbc88fa822c5d523772WechatIMG655.jpeg");
                 accountService.register(account);
                 map.put("code", 0);
                 map.put("data", "");
