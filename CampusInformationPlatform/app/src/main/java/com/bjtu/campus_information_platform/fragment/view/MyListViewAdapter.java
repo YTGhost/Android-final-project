@@ -52,14 +52,12 @@ public class MyListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        //if(convertView ==null){
         viewHolder = new ViewHolder();
         convertView = LayoutInflater.from(context).inflate(R.layout.itemstyle_layout, null);
 
         viewHolder.rank = (TextView) convertView.findViewById(R.id.rank);
         viewHolder.nickname = (TextView) convertView.findViewById(R.id.nickname);
         viewHolder.steps = (TextView) convertView.findViewById(R.id.steps);
-        //viewHolder.avatar=(ImageView)convertView.findViewById(R.drawable.ic_baseline_person_24);
         viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
 
 
