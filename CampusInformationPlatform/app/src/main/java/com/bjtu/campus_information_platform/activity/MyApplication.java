@@ -5,16 +5,14 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.bjtu.campus_information_platform.fragment.ClassListFragment;
 import com.bjtu.campus_information_platform.fragment.HoleFragment;
 import com.bjtu.campus_information_platform.fragment.HomeFragment;
 import com.bjtu.campus_information_platform.fragment.ProfileFragment;
 import com.bjtu.campus_information_platform.fragment.SportFragment;
 import com.bjtu.campus_information_platform.model.Account;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 /*
@@ -31,18 +29,16 @@ public class MyApplication extends Application {
     public static HoleFragment holeFragment = new HoleFragment();
     public static SportFragment sportFragment = new SportFragment();
     public static ProfileFragment profileFragment = new ProfileFragment();
+    public static FragmentManager fragmentManager;
 
     // 登录后获取的用户信息，包括用户id，用户nickname和用户email
     public static Account account;
-
-    private int appCount = 0;
+    //当前用户步数
+    public static int step;
+    //判断当前应用是否处于前台
+    private static int appCount = 0;
     public static Context context;
-    public Boolean isSend=false;
-    public String nickname="ljz";
-    public int mStep=0;
-    public String[] steps={nickname+" step: "+mStep};
-    public List<String> stepList= new ArrayList<>(Arrays.asList(steps));
-    public Boolean isUpdate=false;
+
 
     @Override
     public void onCreate() {

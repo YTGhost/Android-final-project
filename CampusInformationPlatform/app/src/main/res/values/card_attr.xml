@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyCardAttribute">
+
+        <attr name="hole_date" format="string"/>
+        <attr name="hole_content" format="string"/>
+
+    </declare-styleable>
+
+</resources>

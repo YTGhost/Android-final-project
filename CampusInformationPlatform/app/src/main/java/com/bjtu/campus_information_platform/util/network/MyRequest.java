@@ -1,12 +1,17 @@
 package com.bjtu.campus_information_platform.util.network;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
@@ -52,6 +57,24 @@ public class MyRequest {
                 .url(url)
                 .post(body)
                 .build();
+        return request;
+    }
+
+    /**
+     * 上传图片
+     * @return 返回一个创建好的Request对象
+     */
+    public static Request createMultipartRequest(String url, RequestParams params, File file) {
+
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("file",file.getName(),
+                        RequestBody.create(MediaType.parse("image/*"), file))
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
         return request;
     }
 }

@@ -1,11 +1,13 @@
 package com.bjtu.campus_information_platform.util.network;
 
 import com.bjtu.campus_information_platform.model.Account;
+import com.bjtu.campus_information_platform.model.Hole;
 import com.bjtu.campus_information_platform.model.Course;
 import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.model.Test;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -48,6 +50,15 @@ public class HttpRequest {
     }
 
     /**
+     * 发送忘记密码验证码接口
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void getForgetCodeRequest(String email, RequestParams params, ResponseCallback callback) {
+        RequestMode.getRequest("https://www.hihia.top/android-back-end-api/account/getForgetCode/" + email, params, callback, null);
+    }
+
+    /**
      * 注册接口
      * @param params 入参
      * @param callback 回调接口
@@ -80,7 +91,67 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void postStepApi(RequestParams params,ResponseCallback callback){
-        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep",params,callback,new TypeToken<List<Step>>(){}.getType());
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/step/getStep", params, callback, new TypeToken<List<Step>>(){}.getType());
+    }
+
+    /**
+     * 修改用户密码
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void forgetRequest(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/forget", params, callback, null);
+    }
+
+
+    /**
+     * 更新树洞
+     * @param params 入参
+     * @param callback 回调接口
+     */
+
+    public static void getHoleRefreshApi(String id, RequestParams params,ResponseCallback callback){
+        RequestMode.getRequest("https://www.hihia.top/android-back-end-api/hole/holeRefresh/" + id, params, callback,new TypeToken<List<Hole>>(){}.getType());
+    }
+
+    /**
+     * 加载树洞
+     * @param params 入参
+     * @param callback  回调接口
+     */
+
+    public static void getHoleLoadMoreApi(String id, RequestParams params,ResponseCallback callback){
+        RequestMode.getRequest("https://www.hihia.top/android-back-end-api/hole/holeLoadMore/" + id,params,callback,new TypeToken<List<Hole>>(){}.getType());
+    }
+
+    /**
+     * 新增树洞
+     * @param params 入参
+     * @param callback 回调接口
+     */
+
+    public static void postHoleAddHoleApi(RequestParams params,ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/hole/addHole",params,callback,null);
+    }
+
+    /**
+     * 图片上传服务器
+     * @param params
+     * @param file
+     * @param callback
+     */
+    public static void postMultipartApi(RequestParams params, File file, ResponseCallback callback) {
+        RequestMode.postMultipart("https://www.hihia.top/android-back-end-api/oss/upload", params, file, callback, null);
+    }
+
+    /**
+     * 下载图片 Get方式
+     * @param params 入参
+     * @param imgPath 存储地址
+     * @param callback 回调接口
+     */
+    public static void getImgApi(String url, RequestParams params,String imgPath, ResponseByteCallback callback) {
+        RequestMode.getLoadImg(url, params, imgPath, callback);
     }
 
     /**
