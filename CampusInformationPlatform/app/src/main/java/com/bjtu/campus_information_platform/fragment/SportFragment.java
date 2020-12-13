@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -17,7 +18,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -50,7 +50,6 @@ import java.util.Map;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder;
 
-import static com.bjtu.campus_information_platform.activity.MyApplication.context;
 import static com.bjtu.campus_information_platform.activity.MyApplication.getApplication;
 
 public class SportFragment extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
@@ -67,12 +66,14 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     private int mStepSum=0;
     private static final int REFRESH_STEP_WHAT = 0;
     private ISportStepInterface iSportStepInterface;
-
+    private CountDownTimer countDownTimer;
     private Handler mHandler=new Handler();
 
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
+
+    private Boolean isFinished=true;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -184,7 +185,21 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        beginRefreshing();
+        if(isFinished){
+            beginRefreshing();
+            isFinished=false;
+            countDownTimer=new CountDownTimer(5000,1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    Log.e("LJZ","1s is gone!");
+                }
+
+                @Override
+                public void onFinish() {
+                    isFinished=true;
+                }
+            };
+        }
     }
 
     @Override
@@ -192,6 +207,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         beginLoadingMore();
         return true;
     }
+
     // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在activity的onStart方法中调用，自动进入正在刷新状态获取最新数据
     public void beginRefreshing() {
         RequestParams params = new RequestParams();
@@ -210,26 +226,19 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     userData.put("nickname",list.get(i).getNickname());
                     userData.put("rank", String.valueOf(i+1));
                     userData.put("steps", String.valueOf(list.get(i).getSteps()));
-                    userData.put("avatar","avatar_url");
+                    userData.put("avatarUrl",list.get(i).getAvatarUrl());
                     data.add(userData);
                 }
-//                List<String> stepsList = new ArrayList<>();
-//                list.forEach(step -> {
-//                    stepsList.add(step.getNickname() + "  steps: " + step.getSteps());
-//                });
-//                String[] steps = (String[]) stepsList.toArray(new String[0]);
 
                 listView.setAdapter(new MyListViewAdapter(activity,data));
                 fixListViewHeight(listView);
                 mRefreshLayout.endRefreshing();
+                isFinished=true;
             }
 
             @Override
             public void onFailure(OkHttpException failuer) {
                 Log.e("ljz", "failed");
-                String[] steps=new String[1];
-                steps[0]=MyApplication.account.getNickname()+"  steps: "+0;
-
             }
 
         });
