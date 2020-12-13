@@ -24,4 +24,7 @@ public interface AccountMapper {
 
     @Update("update account set password=#{password} where email=#{email}")
     public void forget(Account account);
+
+    @Select("select avatarUrl from account where nickname = #{nickname}")
+    public String getAvatarByNickname(String nickname);
 }

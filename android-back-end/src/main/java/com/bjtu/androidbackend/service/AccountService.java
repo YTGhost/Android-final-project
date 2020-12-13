@@ -13,4 +13,6 @@ public interface AccountService {
     public void register(Account account);
 
     public void forget(Account account);
+
+    public String getAvatarByNickname(String nickname);
 }
