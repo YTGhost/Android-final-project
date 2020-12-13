@@ -103,9 +103,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <!-- Choose nice colors -->
-    app:defaultColor="@color/colorAppAccent"
-    app:loaderColor="@android:color/white"
-    android:textColor="@android:color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
