@@ -31,7 +31,6 @@ public class AddCourseActivity extends AppCompatActivity {
         final EditText inputClassRoom = (EditText) findViewById(R.id.class_room);
         final Spinner inputDay = (Spinner) findViewById(R.id.weekTime);
         final Spinner inputStart = (Spinner) findViewById(R.id.startTime);
-        final Spinner inputEnd = (Spinner) findViewById(R.id.endTime);
 
         Button okButton = (Button) findViewById(R.id.button);
         okButton.setOnClickListener(new View.OnClickListener() {
@@ -41,20 +40,16 @@ public class AddCourseActivity extends AppCompatActivity {
                 String classRoom = inputClassRoom.getText().toString();
                 int day = inputDay.getSelectedItemPosition();
                 int start = inputStart.getSelectedItemPosition();
-                int end = inputEnd.getSelectedItemPosition();
 
-                if (courseName.equals("") || day==0 || start==0 || end==0||classRoom.equals("")) {
+                if (courseName.equals("") || day==0 || start==0 || classRoom.equals("")) {
                     Toast.makeText(getApplicationContext(), "基本课程信息未填写", Toast.LENGTH_SHORT).show();
-                }
-                else if(start>end){
-                    Toast.makeText(getApplicationContext(), "课程时间填写错误", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     RequestParams params = new RequestParams();
                     params.put("id",String.valueOf(MyApplication.account.getId()));
                     params.put("day",String.valueOf(day));
                     params.put("startTime",String.valueOf(start));
-                    params.put("endTime",String.valueOf(end));
+                    params.put("endTime",String.valueOf(start));
                     params.put("courseName",courseName);
                     params.put("room",classRoom);
                     HttpRequest.postClass(params, new ResponseCallback() {
@@ -74,6 +69,14 @@ public class AddCourseActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        Button cancelButton = (Button) findViewById(R.id.button2);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

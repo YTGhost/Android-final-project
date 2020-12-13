@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -42,7 +43,7 @@ public class ClassListFragment extends Fragment {
 
     private Map<Integer, Integer> idMap;
     private Map<Integer, CardView> classMap;
-    final private int maxCoursesNumber = 13;
+    final private int maxCoursesNumber = 7;
     private View view;
     private FloatingActionButton addButton;
 
@@ -99,16 +100,6 @@ public class ClassListFragment extends Fragment {
     private void loadData() {
          //课程列表
         RequestParams param = new RequestParams();
-//        ArrayList<Course> courses = new ArrayList<>();
-//        courses.add(new Course(1,1,2,"语文","叶","yf801"));
-//        courses.add(new Course(2,3,4,"语文","叶","yf801"));
-//        courses.add(new Course(3,5,6,"语文","叶","yf801"));
-//        courses.add(new Course(4,7,8,"语文","叶","yf801"));
-//        courses.add(new Course(5,9,10,"语文","叶","yf801"));
-//        courses.add(new Course(6,11,12,"语文","叶","yf801"));
-//        for(Course course:courses){
-//            createItemCourseView(course);
-//        }
 
         HttpRequest.getClass(MyApplication.account.getId(),param, new ResponseCallback() {
             @Override
@@ -166,7 +157,7 @@ public class ClassListFragment extends Fragment {
         v.setLayoutParams(params);
         //设置随机颜色
         Random random = new Random();
-        v.setCardBackgroundColor(Color.rgb(random.nextInt(128)+127,random.nextInt(128)+127,random.nextInt(128)+127));
+        v.setCardBackgroundColor(Color.rgb(random.nextInt(96)+127,random.nextInt(96)+127,random.nextInt(96)+127));
         //显示课程名
         TextView name_text = v.findViewById(R.id.course_name_context);
         name_text.setText(course.getClassName()+"\n"+course.getRoom());
