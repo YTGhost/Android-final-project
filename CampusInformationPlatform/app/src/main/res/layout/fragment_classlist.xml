@@ -17,12 +17,39 @@
         app:srcCompat="@drawable/add" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="课程表"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="我从哪里来，将到哪里去"
+            android:textSize="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:layout_editor_absoluteX="3dp">
 
         <TextView
@@ -92,8 +119,8 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="410dp"
-        android:layout_height="550dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -115,6 +142,7 @@
                     android:id="@+id/left_view_layout"
                     android:layout_width="55dp"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"></LinearLayout>
 
                 <RelativeLayout
