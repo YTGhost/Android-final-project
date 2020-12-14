@@ -1,8 +1,10 @@
 package com.bjtu.campus_information_platform.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
@@ -41,6 +43,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -115,5 +119,55 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), ForgetActivity.class);
             startActivity(intent);
         });
+        request_permissions();
     }
+
+    private void request_permissions() {
+        // 创建一个权限列表，把需要使用而没用授权的的权限存放在这里
+        List<String> permissionList = new ArrayList<>();
+
+        // 判断权限是否已经授予，没有就把该权限添加到列表中
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACTIVITY_RECOGNITION);
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+
+        // 如果列表为空，就是全部权限都获取了，不用再次获取了。不为空就去申请权限
+        if (!permissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+                    permissionList.toArray(new String[permissionList.size()]), 1002);
+        } else {
+            //Toast.makeText(this.activity, "多个权限你都有了，不用再次申请", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1002:
+                // 1002请求码对应的是申请多个权限
+                if (grantResults.length > 0) {
+                    // 因为是多个权限，所以需要一个循环获取每个权限的获取情况
+                    for (int i = 0; i < grantResults.length; i++) {
+                        // PERMISSION_DENIED 这个值代表是没有授权，我们可以把被拒绝授权的权限显示出来
+                        if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                            Toast.makeText(this, permissions[i] + "权限被拒绝了", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
 }

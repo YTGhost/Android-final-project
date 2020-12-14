@@ -129,7 +129,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
 
         //权限申请
-        request_permissions();
+
         //开启计步Service，同时绑定Activity进行aidl通信
         Intent intent = new Intent(this.activity, TodayStepService.class);
         activity.startService(intent);
@@ -148,66 +148,16 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 }
                 mDelayHandler.sendEmptyMessageDelayed(REFRESH_STEP_WHAT, TIME_INTERVAL_REFRESH);
             }
-
             @Override
             public void onServiceDisconnected(ComponentName name) {
-
             }
         }, Context.BIND_AUTO_CREATE);
-
         //计时器
         mhandmhandlele.post(timeRunable);
         return view;
     }
 
 
-    private void request_permissions() {
-        // 创建一个权限列表，把需要使用而没用授权的的权限存放在这里
-        List<String> permissionList = new ArrayList<>();
-
-        // 判断权限是否已经授予，没有就把该权限添加到列表中
-        if (ContextCompat.checkSelfPermission(this.activity, Manifest.permission.ACTIVITY_RECOGNITION)
-                != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.ACTIVITY_RECOGNITION);
-        }
-
-        if (ContextCompat.checkSelfPermission(this.activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-
-        if (ContextCompat.checkSelfPermission(this.activity, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
-
-        // 如果列表为空，就是全部权限都获取了，不用再次获取了。不为空就去申请权限
-        if (!permissionList.isEmpty()) {
-            ActivityCompat.requestPermissions(this.activity,
-                    permissionList.toArray(new String[permissionList.size()]), 1002);
-        } else {
-            //Toast.makeText(this.activity, "多个权限你都有了，不用再次申请", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1002:
-                // 1002请求码对应的是申请多个权限
-                if (grantResults.length > 0) {
-                    // 因为是多个权限，所以需要一个循环获取每个权限的获取情况
-                    for (int i = 0; i < grantResults.length; i++) {
-                        // PERMISSION_DENIED 这个值代表是没有授权，我们可以把被拒绝授权的权限显示出来
-                        if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                            Toast.makeText(this.activity, permissions[i] + "权限被拒绝了", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-                break;
-        }
-    }
 
     private void initRefreshLayout() {
         mRefreshLayout = findView(view, R.id.sport_refresh_layout);
