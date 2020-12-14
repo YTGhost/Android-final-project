@@ -42,6 +42,10 @@ public class AccountController {
             Account item = list.get(0);
             BCrypt.Result result = BCrypt.verifyer().verify(account.getPassword().toCharArray(), item.getPassword());
             if(result.verified) {
+                // 登录时如果发现时新用户，就可以设置为老用户了，下次再登录时，发过去的isNew就是0了
+                if(item.getIsNew() == 1) {
+                    accountService.newToOld(item.getId());
+                }
                 map.put("code", 0);
                 map.put("data", item);
                 map.put("msg", "登录成功");
@@ -67,6 +71,10 @@ public class AccountController {
             // 验证成功
             if(code.equals(jedis.get(account.getEmail()))) {
                 account.setPassword(BCrypt.withDefaults().hashToString(10, account.getPassword().toCharArray()));
+                account.setAvatarUrl("https://hihia.oss-cn-beijing.aliyuncs.com/2020/12/13/4839513ad2b54517900059ca8cc503cbWechatIMG1001.png");
+                account.setBackgroundUrl("https://hihia.oss-cn-beijing.aliyuncs.com/2020/12/13/8a08025711fe4bbc88fa822c5d523772WechatIMG655.jpeg");
+                // 注册时设置为新用户
+                account.setIsNew(1);
                 accountService.register(account);
                 map.put("code", 0);
                 map.put("data", "");
@@ -202,6 +210,32 @@ public class AccountController {
             map.put("data", "");
             map.put("msg", "用户名已经被注册");
         }
+        return map;
+    }
+
+    @ApiOperation(value = "更新头像")
+    @PostMapping(value = "/changeAvatar")
+    @ResponseBody
+    public Map<String, Object> changeAvatar(@RequestBody Account account) {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println(account);
+        accountService.changeAvatar(account);
+        map.put("code", 0);
+        map.put("data", "");
+        map.put("msg", "");
+        return map;
+    }
+
+    @ApiOperation(value = "更新背景图")
+    @PostMapping(value = "/changeBackground")
+    @ResponseBody
+    public Map<String, Object> changeBackground(@RequestBody Account account) {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println(account);
+        accountService.changeBackground(account);
+        map.put("code", 0);
+        map.put("data", "");
+        map.put("msg", "");
         return map;
     }
 }

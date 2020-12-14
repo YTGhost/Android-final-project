@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
     private TransitionButton loginBtn;
     private TextView registerText;
     private TextView forgetText;
-    private Button button;
-    private ImageView imageView;
     private static final int PICK_IMAGE = 100;
 
     @Override
@@ -79,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         loginBtn = (TransitionButton) findViewById(R.id.loginBtn);
         registerText = (TextView) findViewById(R.id.registerText);
         forgetText = (TextView) findViewById(R.id.forgetText);
-        button = (Button) findViewById(R.id.button);
-        imageView = (ImageView) findViewById(R.id.imageView);
 
         loginBtn.setOnClickListener(v -> {
             loginBtn.startAnimation();
@@ -119,69 +115,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), ForgetActivity.class);
             startActivity(intent);
         });
-
-        button.setOnClickListener(v -> {
-            Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-            startActivityForResult(gallery, PICK_IMAGE);
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            Uri imageUri = data.getData();
-            File file = new File(getRealPathFromURI(imageUri));
-            System.out.println(file);
-            // 上传文件，可不看
-            HttpRequest.postMultipartApi(null, file, new ResponseCallback() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    JSONObject result = null;
-                    try {
-                        result = new JSONObject(responseObj.toString());
-                        String url = result.getString("data");
-                        // 下载图片
-                        HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
-                            @Override
-                            public void onSuccess(File file) {
-                                Toast.makeText(MainActivity.this, "图片下载成功="+file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-                                Log.e("TAG", "图片下载成功="+file.getAbsolutePath());
-                                imageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
-                            }
-
-                            @Override
-                            public void onFailure(String failureMsg) {
-
-                            }
-                        });
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(responseObj);
-                }
-
-                @Override
-                public void onFailure(OkHttpException failuer) {
-
-                }
-            });
-        }
-    }
-
-    public String getRealPathFromURI(Uri contentUri) {
-
-        // can post image
-        String [] proj={MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery( contentUri,
-                proj, // Which columns to return
-                null,       // WHERE clause; which rows to return (all rows)
-                null,       // WHERE clause selection arguments (none)
-                null); // Order-by clause (ascending by name)
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-
-        return cursor.getString(column_index);
     }
 }

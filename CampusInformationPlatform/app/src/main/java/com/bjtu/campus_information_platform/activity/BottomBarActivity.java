@@ -1,7 +1,10 @@
 package com.bjtu.campus_information_platform.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,6 +17,7 @@ import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.adapter.ScreenSlidePageFragmentAdapter;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +41,8 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView = (BubbleNavigationLinearView) findViewById(R.id.bottom_navigation_view_linear);
 
         // 添加所需的Fragment
-        mFragmentList.add(MyApplication.homeFragment);
         mFragmentList.add(MyApplication.classListFragment);
+        mFragmentList.add(MyApplication.homeFragment);
         mFragmentList.add(MyApplication.holeFragment);
         mFragmentList.add(MyApplication.sportFragment);
         mFragmentList.add(MyApplication.profileFragment);
@@ -71,5 +75,34 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView.setNavigationChangeListener((view, position) -> {
             mViewPager.setCurrentItem(position, true);
         });
+
+        // 新用户进入引导
+        if(MyApplication.account.getIsNew() == 1) {
+            Intent intent = new Intent(getBaseContext(), IntroActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String pathUrl =
+                Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                        + "/zhangshangtongtong/";
+        deleteFile(new File(pathUrl));
+    }
+
+    private void deleteFile(File file){
+        if(file.isDirectory()){
+            File[] files=file.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                File f=files[i];
+                Log.e("LJZ","delete filename = "+f.getName());
+                deleteFile(f);
+
+            }
+        }else if(file.exists()){
+            file.delete();
+        }
     }
 }

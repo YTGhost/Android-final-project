@@ -2,10 +2,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <TextView
         android:id="@+id/footer_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="已经到底啦"
+        android:textColor="@color/grey_active"
+        android:textSize="12sp"
         android:visibility="visible" />
 </RelativeLayout>

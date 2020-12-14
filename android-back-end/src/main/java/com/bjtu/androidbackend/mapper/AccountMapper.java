@@ -19,7 +19,7 @@ public interface AccountMapper {
     @Select("select * from account where nickname = #{nickname}")
     public List<Account> loginByNickname(String nickname);
 
-    @Insert("insert into account (nickname, email, password) values (#{nickname}, #{email}, #{password})")
+    @Insert("insert into account (nickname, email, password, avatarUrl, backgroundUrl) values (#{nickname}, #{email}, #{password}, #{avatarUrl}, #{backgroundUrl})")
     public void register(Account account);
 
     @Update("update account set password=#{password} where email=#{email}")
@@ -27,4 +27,13 @@ public interface AccountMapper {
 
     @Select("select avatarUrl from account where nickname = #{nickname}")
     public String getAvatarByNickname(String nickname);
+
+    @Update("update account set avatarUrl = #{avatarUrl} where id = #{id}")
+    public void changeAvatar(Account account);
+
+    @Update("update account set backgroundUrl = #{backgroundUrl} where id = #{id}")
+    public void changeBackground(Account account);
+
+    @Update("update account set isNew = 0 where id = #{id}")
+    public void newToOld(Integer id);
 }

@@ -135,6 +135,16 @@ public class HttpRequest {
     }
 
     /**
+     *查询空闲教室
+     * @param params
+     * @param file
+     * @param callback
+     */
+    public static void postClassQueryApi(RequestParams params,ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/queryClass/freeroom",params,callback,new TypeToken<List<String>>(){}.getType());
+    }
+  
+    /**
      * 图片上传服务器
      * @param params
      * @param file
@@ -181,5 +191,21 @@ public class HttpRequest {
         RequestMode.getRequest("https://www.hihia.top/android-back-end-api/classlist/"+id,params,callback,new TypeToken<List<Course>>(){}.getType());
     }
 
+    /**
+     * 更新头像
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void changeAvatar(RequestParams params, ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/changeAvatar", params, callback, null);
+    }
 
+    /**
+     * 更新背景图
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void changeBackground(RequestParams params, ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/changeBackground", params, callback, null);
+    }
 }
