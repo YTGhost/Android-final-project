@@ -30,8 +30,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_email_white_24dp"
-                android:hint="请输入邮箱"
-                android:text="283304489@qq.com" />
+                android:hint="请输入邮箱" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -47,8 +46,7 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_lock_white_24dp"
                 android:hint="请输入密码"
-                android:inputType="textPassword"
-                android:text="yt232419" />
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
