@@ -86,6 +86,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
     private Boolean isFinished = true;
     private Boolean isFirst=true;
+    private Boolean isRefreshing=false;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -104,6 +105,9 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 public void onSuccess(File file) {
                     map.put(getApplication().account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
                     mImageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+                    if(listView.getHeaderViewsCount()!=0&&!isRefreshing){
+                        beginRefreshing();
+                    }
                 }
 
                 @Override
@@ -118,7 +122,10 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         listView.addHeaderView(header);
 
         initRefreshLayout();
-        beginRefreshing();
+        if(!isRefreshing){
+            beginRefreshing();
+        }
+
 
 
         //权限申请
@@ -214,7 +221,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        if (isFinished) {
+        if (isFinished&&!isRefreshing) {
             beginRefreshing();
             isFinished = false;
             countDownTimer = new CountDownTimer(5000, 1000) {
@@ -239,6 +246,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
     // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在activity的onStart方法中调用，自动进入正在刷新状态获取最新数据
     public void beginRefreshing() {
+        isRefreshing=true;
         RequestParams params = new RequestParams();
         params.put("nickname", MyApplication.account.getNickname());
         params.put("steps", String.valueOf(mStepSum));
@@ -278,6 +286,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                             fixListViewHeight(listView);
                             mRefreshLayout.endRefreshing();
                             isFinished = true;
+                            isRefreshing=false;
                         }
 
                         @Override
@@ -290,6 +299,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     fixListViewHeight(listView);
                     mRefreshLayout.endRefreshing();
                     isFinished = true;
+                    isRefreshing=false;
                 }
 
 
