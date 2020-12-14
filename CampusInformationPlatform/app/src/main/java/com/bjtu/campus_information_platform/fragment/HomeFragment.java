@@ -35,16 +35,13 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private String building;
-    private String classTime;
+    private String building = "逸夫";
+    private String classTime = "第一节";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        building="逸夫";
-        classTime ="第一节";
 
         RecyclerView classroomList = (RecyclerView) view.findViewById(R.id.classroomList);
 
