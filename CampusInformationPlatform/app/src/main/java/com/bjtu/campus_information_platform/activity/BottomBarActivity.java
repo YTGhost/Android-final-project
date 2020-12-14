@@ -2,6 +2,8 @@ package com.bjtu.campus_information_platform.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,6 +16,7 @@ import com.bjtu.campus_information_platform.R;
 import com.bjtu.campus_information_platform.adapter.ScreenSlidePageFragmentAdapter;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,5 +74,28 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView.setNavigationChangeListener((view, position) -> {
             mViewPager.setCurrentItem(position, true);
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String pathUrl =
+                Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                        + "/zhangshangtongtong/";
+        deleteFile(new File(pathUrl));
+    }
+
+    private void deleteFile(File file){
+        if(file.isDirectory()){
+            File[] files=file.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                File f=files[i];
+                Log.e("LJZ","delete filename = "+f.getName());
+                deleteFile(f);
+
+            }
+        }else if(file.exists()){
+            file.delete();
+        }
     }
 }
