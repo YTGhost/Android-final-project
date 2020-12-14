@@ -15,4 +15,8 @@ public interface AccountService {
     public void forget(Account account);
 
     public String getAvatarByNickname(String nickname);
+
+    public void changeAvatar(Account account);
+
+    public void changeBackground(Account account);
 }

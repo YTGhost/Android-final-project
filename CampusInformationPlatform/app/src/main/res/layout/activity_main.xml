@@ -30,7 +30,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_email_white_24dp"
-                android:hint="请输入邮箱" />
+                android:hint="请输入邮箱"
+                android:text="283304489@qq.com" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +47,8 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_lock_white_24dp"
                 android:hint="请输入密码"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="yt232419" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -83,24 +85,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="上传图片"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.521" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="88dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

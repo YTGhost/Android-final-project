@@ -38,4 +38,14 @@ public class AccountServiceImpl implements AccountService {
     public String getAvatarByNickname(String nickname) {
         return accountMapper.getAvatarByNickname(nickname);
     }
+
+    @Override
+    public void changeAvatar(Account account) {
+        accountMapper.changeAvatar(account);
+    }
+
+    @Override
+    public void changeBackground(Account account) {
+        accountMapper.changeBackground(account);
+    }
 }

@@ -206,4 +206,30 @@ public class AccountController {
         }
         return map;
     }
+
+    @ApiOperation(value = "更新头像")
+    @PostMapping(value = "/changeAvatar")
+    @ResponseBody
+    public Map<String, Object> changeAvatar(@RequestBody Account account) {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println(account);
+        accountService.changeAvatar(account);
+        map.put("code", 0);
+        map.put("data", "");
+        map.put("msg", "");
+        return map;
+    }
+
+    @ApiOperation(value = "更新背景图")
+    @PostMapping(value = "/changeBackground")
+    @ResponseBody
+    public Map<String, Object> changeBackground(@RequestBody Account account) {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println(account);
+        accountService.changeBackground(account);
+        map.put("code", 0);
+        map.put("data", "");
+        map.put("msg", "");
+        return map;
+    }
 }

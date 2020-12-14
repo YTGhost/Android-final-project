@@ -27,4 +27,10 @@ public interface AccountMapper {
 
     @Select("select avatarUrl from account where nickname = #{nickname}")
     public String getAvatarByNickname(String nickname);
+
+    @Update("update account set avatarUrl = #{avatarUrl} where id = #{id}")
+    public void changeAvatar(Account account);
+
+    @Update("update account set backgroundUrl = #{backgroundUrl} where id = #{id}")
+    public void changeBackground(Account account);
 }

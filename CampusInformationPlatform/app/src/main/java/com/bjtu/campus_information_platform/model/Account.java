@@ -11,7 +11,7 @@ public class Account {
 
     private String avatarUrl;
 
-    private String backgroudUrl;
+    private String backgroundUrl;
 
     public Integer getId() {
         return id;
@@ -45,12 +45,12 @@ public class Account {
         this.avatarUrl = avatarUrl;
     }
 
-    public String getBackgroudUrl() {
-        return backgroudUrl;
+    public String getBackgroundUrl() {
+        return backgroundUrl;
     }
 
-    public void setBackgroudUrl(String backgroudUrl) {
-        this.backgroudUrl = backgroudUrl;
+    public void setBackgroundUrl(String backgroundUrl) {
+        this.backgroundUrl = backgroundUrl;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Account {
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
-                ", backgroudUrl='" + backgroudUrl + '\'' +
+                ", backgroudUrl='" + backgroundUrl + '\'' +
                 '}';
     }
 }

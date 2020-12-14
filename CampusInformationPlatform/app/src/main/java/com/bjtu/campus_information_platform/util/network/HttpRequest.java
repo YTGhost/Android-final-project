@@ -190,4 +190,22 @@ public class HttpRequest {
     public static void getClass(int id,RequestParams params,ResponseCallback callback){
         RequestMode.getRequest("https://www.hihia.top/android-back-end-api/classlist/"+id,params,callback,new TypeToken<List<Course>>(){}.getType());
     }
+
+    /**
+     * 更新头像
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void changeAvatar(RequestParams params, ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/changeAvatar", params, callback, null);
+    }
+
+    /**
+     * 更新背景图
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void changeBackground(RequestParams params, ResponseCallback callback){
+        RequestMode.postRequest("https://www.hihia.top/android-back-end-api/account/changeBackground", params, callback, null);
+    }
 }

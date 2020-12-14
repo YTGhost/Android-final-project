@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,10 @@ import com.bjtu.campus_information_platform.activity.MyApplication;
 
 import com.bjtu.campus_information_platform.activity.ProfileAbout;
 import com.bjtu.campus_information_platform.activity.ProfileMySetting;
+import com.bjtu.campus_information_platform.util.network.HttpRequest;
+import com.bjtu.campus_information_platform.util.network.OkHttpException;
+import com.bjtu.campus_information_platform.util.network.RequestParams;
+import com.bjtu.campus_information_platform.util.network.ResponseCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 
@@ -60,9 +65,8 @@ public class ProfileFragment extends Fragment {
 
         //初始头像和背景
 
-
-        Glide.with(MyApplication.context).load(MyApplication.account.getBackgroudUrl())
-                .bitmapTransform(new BlurTransformation(getActivity(), 25), new CenterCrop(getActivity()))
+        Glide.with(MyApplication.context).load(MyApplication.account.getBackgroundUrl())
+                .bitmapTransform(new BlurTransformation(MyApplication.context, 12), new CenterCrop(MyApplication.context))
                 .into(backImageView);
 
         Glide.with(MyApplication.context).load(MyApplication.account.getAvatarUrl())
@@ -109,9 +113,42 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    public void changeAvatar() {
+//        更新到数据库
+        RequestParams params = new RequestParams();
+        params.put("id", MyApplication.account.getId().toString());
+        params.put("avatarUrl", MyApplication.account.getAvatarUrl());
+        HttpRequest.changeAvatar(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+            }
 
+            @Override
+            public void onFailure(OkHttpException failuer) {
+            }
+        });
+        Glide.with(MyApplication.context).load(MyApplication.account.getAvatarUrl())
+                .bitmapTransform(new CropCircleTransformation(getActivity()))
+                .into(headImageView);
+    }
 
+    public void changeBackground() {
+        RequestParams params = new RequestParams();
+        params.put("id", MyApplication.account.getId().toString());
+        params.put("backgroundUrl", MyApplication.account.getBackgroundUrl());
+        HttpRequest.changeBackground(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+            }
 
+            @Override
+            public void onFailure(OkHttpException failuer) {
+            }
+        });
+        Glide.with(MyApplication.context).load(MyApplication.account.getBackgroundUrl())
+                .bitmapTransform(new BlurTransformation(MyApplication.context, 12), new CenterCrop(MyApplication.context))
+                .into(backImageView);
+    }
 
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
