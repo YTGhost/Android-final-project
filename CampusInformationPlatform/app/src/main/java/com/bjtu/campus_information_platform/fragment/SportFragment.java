@@ -104,6 +104,9 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 public void onSuccess(File file) {
                     map.put(getApplication().account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
                     mImageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+                    if(listView.getHeaderViewsCount()!=0){
+                        beginRefreshing();
+                    }
                 }
 
                 @Override
@@ -253,7 +256,6 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 for (int i = 0; i < list.size(); i++) {
                     if(list.get(i).getNickname().equals(getApplication().account.getNickname())&&list.get(i).getSteps()>mStepSum){
                         mStepSum=list.get(i).getSteps();
-
                     }
                     Map<String, String> userData = new HashMap<>();
                     userData.put("nickname", list.get(i).getNickname());
@@ -291,8 +293,6 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     mRefreshLayout.endRefreshing();
                     isFinished = true;
                 }
-
-
             }
 
             @Override
@@ -350,7 +350,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     if (null != iSportStepInterface) {
                         int step = 0;
                         try {
-                            
+
                             newStep=iSportStepInterface.getCurrentTimeSportStep();
                             mStepSum=mStepSum+newStep-oldStep;
                             oldStep=newStep;
