@@ -90,6 +90,7 @@ public class BottomBarActivity extends AppCompatActivity {
                 Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                         + "/zhangshangtongtong/";
         deleteFile(new File(pathUrl));
+        MyApplication.sportFragment.map.clear();
     }
 
     private void deleteFile(File file){

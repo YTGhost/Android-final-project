@@ -230,7 +230,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                             header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
                             mImageView = (ImageView) header.findViewById(R.id.layout_header_image);
                             mImageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
-                            header.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,500));
+                            header.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,400));
                             listView.addHeaderView(header);
                             listView.setAdapter(new MyListViewAdapter(activity, data));
                             fixListViewHeight(listView);
