@@ -20,6 +20,17 @@ public class TestController {
     @Autowired
     TestService testService;
 
+    @ApiOperation(value = "测试负载均衡")
+    @GetMapping(value = "/loadBalance")
+    @ResponseBody
+    public Map<String, Object> loadBalance() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("data", "");
+        map.put("msg", "这里是6386");
+        return map;
+    }
+
     // Get示例
     @ApiOperation(value = "测试获取用户列表")
     @GetMapping(value = "/getList")

@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:gravity="center"
-            android:text="当前版本号：1.9.0"
+            android:text="当前版本号：1.0.0"
             android:textColor="#000000"
             android:textSize="18dp" />
 
