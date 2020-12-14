@@ -19,6 +19,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import static com.bjtu.campus_information_platform.activity.MyApplication.getApplication;
+import static com.bjtu.campus_information_platform.activity.MyApplication.sportFragment;
+
 public class MyListViewAdapter extends BaseAdapter {
 
     public List<Map<String, String>> list;
@@ -55,15 +58,16 @@ public class MyListViewAdapter extends BaseAdapter {
         viewHolder.nickname = (TextView) convertView.findViewById(R.id.nickname);
         viewHolder.steps = (TextView) convertView.findViewById(R.id.steps);
         viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
+        viewHolder.str = (TextView) convertView.findViewById(R.id.str);
 
         String url = list.get(position).get("avatarUrl");
-
         HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
             @Override
             public void onSuccess(File file) {
                 viewHolder.nickname.setText(list.get(position).get("nickname"));
                 viewHolder.rank.setText(list.get(position).get("rank"));
                 viewHolder.steps.setText(list.get(position).get("steps"));
+                viewHolder.str.setText("        累计步数");
                 Log.e("TAG", "图片下载成功=" + file.getAbsolutePath());
                 viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
             }
@@ -73,9 +77,11 @@ public class MyListViewAdapter extends BaseAdapter {
                 viewHolder.nickname.setText(list.get(position).get("nickname"));
                 viewHolder.rank.setText(list.get(position).get("rank"));
                 viewHolder.steps.setText(list.get(position).get("steps"));
+                viewHolder.str.setText("        累计步数");
                 viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
             }
         });
+
 
         return convertView;
     }
@@ -85,5 +91,6 @@ public class MyListViewAdapter extends BaseAdapter {
         TextView rank;
         TextView nickname;
         TextView steps;
+        TextView str;
     }
 }

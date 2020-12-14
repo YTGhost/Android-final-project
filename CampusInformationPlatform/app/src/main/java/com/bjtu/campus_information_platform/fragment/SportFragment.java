@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -62,7 +63,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     public View view;
     private ListView listView;
     ImageView mImageView;
-    TextView mTextView;
+
     //循环取当前时刻的步数中间的间隔时间
     private long TIME_INTERVAL_REFRESH = 3000;
     private Handler mDelayHandler = new Handler(new TodayStepCounterCall());
@@ -91,9 +92,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         View header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
         mImageView = (ImageView) header.findViewById(R.id.layout_header_image);
         listView.addHeaderView(header);
-        View footer = LayoutInflater.from(activity).inflate(R.layout.listview_footer, null);
-        mTextView = (TextView) footer.findViewById(R.id.footer_text);
-        listView.addFooterView(footer);
+
         initRefreshLayout();
         beginRefreshing();
 
@@ -181,7 +180,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     private void initRefreshLayout() {
         mRefreshLayout = findView(view, R.id.sport_refresh_layout);
         mRefreshLayout.setDelegate(this);
-        BGAStickinessRefreshViewHolder refreshViewHolder = new BGAStickinessRefreshViewHolder(this.getActivity(), true);
+        BGAStickinessRefreshViewHolder refreshViewHolder = new BGAStickinessRefreshViewHolder(this.getActivity(), false);
         refreshViewHolder.setRotateImage(R.drawable.bga_refresh);
         refreshViewHolder.setStickinessColor(R.color.gery_inactive);
         refreshViewHolder.setLoadMoreBackgroundColorRes(R.color.colorPrimary);
