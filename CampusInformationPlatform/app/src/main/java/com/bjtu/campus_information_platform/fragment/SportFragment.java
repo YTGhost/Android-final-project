@@ -72,6 +72,8 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     private long TIME_INTERVAL_REFRESH = 3000;
     private Handler mDelayHandler = new Handler(new TodayStepCounterCall());
     private int mStepSum = 0;
+    private int oldStep=0;
+    private int newStep=0;
     private static final int REFRESH_STEP_WHAT = 0;
     private ISportStepInterface iSportStepInterface;
     private CountDownTimer countDownTimer;
@@ -131,6 +133,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 iSportStepInterface = ISportStepInterface.Stub.asInterface(service);
                 try {
                     mStepSum = iSportStepInterface.getCurrentTimeSportStep();
+                    oldStep=mStepSum;
                     MyApplication.step = mStepSum;
                     updateStepCount();
                 } catch (RemoteException e) {
@@ -248,6 +251,10 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 List<Step> list = (List<Step>) responseObj;
                 List<Map<String, String>> data = new ArrayList<>();
                 for (int i = 0; i < list.size(); i++) {
+                    if(list.get(i).getNickname().equals(getApplication().account.getNickname())&&list.get(i).getSteps()>mStepSum){
+                        mStepSum=list.get(i).getSteps();
+
+                    }
                     Map<String, String> userData = new HashMap<>();
                     userData.put("nickname", list.get(i).getNickname());
                     userData.put("rank", String.valueOf(i + 1));
@@ -343,15 +350,14 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     if (null != iSportStepInterface) {
                         int step = 0;
                         try {
-                            step = iSportStepInterface.getCurrentTimeSportStep();
+                            
+                            newStep=iSportStepInterface.getCurrentTimeSportStep();
+                            mStepSum=mStepSum+newStep-oldStep;
+                            oldStep=newStep;
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
-                        if (mStepSum != step) {
-                            mStepSum = step;
-                            MyApplication.step = mStepSum;
-                            updateStepCount();
-                        }
+
                     }
                     mDelayHandler.sendEmptyMessageDelayed(REFRESH_STEP_WHAT, TIME_INTERVAL_REFRESH);
 
