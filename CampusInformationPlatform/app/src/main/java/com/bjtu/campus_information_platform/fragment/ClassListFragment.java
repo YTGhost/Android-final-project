@@ -121,7 +121,7 @@ public class ClassListFragment extends Fragment {
     private void createLeftView() {
         for (int i = 0; i < maxCoursesNumber; i++) {
             View view = LayoutInflater.from(MyApplication.context).inflate(R.layout.class_left_view, null);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(110,180);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(110,280);
             view.setLayoutParams(params);
 
             TextView text =view.findViewById(R.id.class_number_text);
@@ -149,7 +149,7 @@ public class ClassListFragment extends Fragment {
         int dayId = idMap.get(getDay);
         RelativeLayout day = this.view.findViewById(dayId);
 
-        int height = 180;
+        int height = 280;
         final CardView v = (CardView)LayoutInflater.from(MyApplication.context).inflate(R.layout.course_card, null); //加载单个课程布局
         v.setY(height * (course.getStartTime()-1)); //设置开始高度,即第几节课开始x
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
