@@ -79,7 +79,6 @@ public class ProfileMySetting extends AppCompatActivity {
                             MyApplication.account.setAvatarUrl(url);
                             MyApplication.profileFragment.changeAvatar();
                         } else {
-                            Toast.makeText(ProfileMySetting.this, url+"", Toast.LENGTH_SHORT).show();
                             MyApplication.account.setBackgroundUrl(url);
                             MyApplication.profileFragment.changeBackground();
                         }
