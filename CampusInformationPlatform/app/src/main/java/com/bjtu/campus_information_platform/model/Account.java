@@ -13,6 +13,8 @@ public class Account {
 
     private String backgroundUrl;
 
+    private Integer isNew;
+
     public Integer getId() {
         return id;
     }
@@ -53,6 +55,14 @@ public class Account {
         this.backgroundUrl = backgroundUrl;
     }
 
+    public Integer getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Integer isNew) {
+        this.isNew = isNew;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -60,7 +70,8 @@ public class Account {
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
-                ", backgroudUrl='" + backgroundUrl + '\'' +
+                ", backgroundUrl='" + backgroundUrl + '\'' +
+                ", isNew=" + isNew +
                 '}';
     }
 }

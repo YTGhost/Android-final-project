@@ -1,5 +1,6 @@
 package com.bjtu.campus_information_platform.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,8 +41,8 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView = (BubbleNavigationLinearView) findViewById(R.id.bottom_navigation_view_linear);
 
         // 添加所需的Fragment
-        mFragmentList.add(MyApplication.homeFragment);
         mFragmentList.add(MyApplication.classListFragment);
+        mFragmentList.add(MyApplication.homeFragment);
         mFragmentList.add(MyApplication.holeFragment);
         mFragmentList.add(MyApplication.sportFragment);
         mFragmentList.add(MyApplication.profileFragment);
@@ -74,6 +75,12 @@ public class BottomBarActivity extends AppCompatActivity {
         mBubbleNavigationLinearView.setNavigationChangeListener((view, position) -> {
             mViewPager.setCurrentItem(position, true);
         });
+
+        // 新用户进入引导
+        if(MyApplication.account.getIsNew() == 1) {
+            Intent intent = new Intent(getBaseContext(), IntroActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

@@ -42,4 +42,9 @@
     <color name="grey_bg_light">#fafafa</color>
 
     <color name="textInputLayout">#96ffffff</color>
+
+    <color name="color_course">#c2185b</color>
+    <color name="color_room">#03a9f4</color>
+    <color name="color_hole">#607d8b</color>
+    <color name="color_sport">#4caf50</color>
 </resources>

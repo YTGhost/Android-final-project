@@ -19,4 +19,6 @@ public interface AccountService {
     public void changeAvatar(Account account);
 
     public void changeBackground(Account account);
+
+    public void newToOld(Integer id);
 }

@@ -48,4 +48,9 @@ public class AccountServiceImpl implements AccountService {
     public void changeBackground(Account account) {
         accountMapper.changeBackground(account);
     }
+
+    @Override
+    public void newToOld(Integer id) {
+        accountMapper.newToOld(id);
+    }
 }

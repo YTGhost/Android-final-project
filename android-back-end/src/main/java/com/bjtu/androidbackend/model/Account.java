@@ -29,6 +29,10 @@ public class Account implements Serializable {
     @ApiModelProperty(name = "backgroundUrl", value = "背景图地址", required = false)
     private String backgroundUrl;
 
+    // 1为新用户，0为老用户
+    @ApiModelProperty(name = "isNew", value = "是否是新用户", required = false)
+    private Integer isNew;
+
     public Integer getId() {
         return id;
     }
@@ -81,8 +85,16 @@ public class Account implements Serializable {
         return backgroundUrl;
     }
 
-    public void setBackgroudUrl(String backgroundUrl) {
+    public void setBackgroundUrl(String backgroundUrl) {
         this.backgroundUrl = backgroundUrl;
+    }
+
+    public Integer getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Integer isNew) {
+        this.isNew = isNew;
     }
 
     @Override
@@ -93,6 +105,9 @@ public class Account implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", code='" + code + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", backgroundUrl='" + backgroundUrl + '\'' +
+                ", isNew=" + isNew +
                 '}';
     }
 }

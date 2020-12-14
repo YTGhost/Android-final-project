@@ -38,7 +38,7 @@
             app:bt_colorInactive="@color/red_inactive"
             app:bt_icon="@drawable/ic_home"
             app:bt_shape="@drawable/transition_background_drawable_home"
-            app:bt_title="@string/home" />
+            app:bt_title="@string/classList" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/l_item_classList"
@@ -49,7 +49,7 @@
             app:bt_colorInactive="@color/blue_inactive"
             app:bt_icon="@drawable/ic_classlist"
             app:bt_shape="@drawable/transition_background_drawable_classlist"
-            app:bt_title="@string/classList" />
+            app:bt_title="@string/home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/l_item_hole"
