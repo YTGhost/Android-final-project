@@ -61,27 +61,35 @@ public class MyListViewAdapter extends BaseAdapter {
         viewHolder.str = (TextView) convertView.findViewById(R.id.str);
 
         String url = list.get(position).get("avatarUrl");
-        HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
-            @Override
-            public void onSuccess(File file) {
-                viewHolder.nickname.setText(list.get(position).get("nickname"));
-                viewHolder.rank.setText(list.get(position).get("rank"));
-                viewHolder.steps.setText(list.get(position).get("steps"));
-                viewHolder.str.setText("        累计步数");
-                Log.e("TAG", "图片下载成功=" + file.getAbsolutePath());
-                viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
-            }
+        if(getApplication().sportFragment.map.get(url)!=null){
+            viewHolder.avatar.setImageURI(Uri.parse(getApplication().sportFragment.map.get(url)));
+            viewHolder.nickname.setText(list.get(position).get("nickname"));
+            viewHolder.rank.setText(list.get(position).get("rank"));
+            viewHolder.steps.setText(list.get(position).get("steps"));
+            viewHolder.str.setText("        累计步数");
+        }else{
+            HttpRequest.getImgApi(url, null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+                @Override
+                public void onSuccess(File file) {
+                    viewHolder.nickname.setText(list.get(position).get("nickname"));
+                    viewHolder.rank.setText(list.get(position).get("rank"));
+                    viewHolder.steps.setText(list.get(position).get("steps"));
+                    viewHolder.str.setText("        累计步数");
+                    Log.e("TAG", "图片下载成功=" + file.getAbsolutePath());
+                    getApplication().sportFragment.map.put(url,Uri.fromFile(new File(file.getAbsolutePath())).toString());
+                    viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+                }
 
-            @Override
-            public void onFailure(String failureMsg) {
-                viewHolder.nickname.setText(list.get(position).get("nickname"));
-                viewHolder.rank.setText(list.get(position).get("rank"));
-                viewHolder.steps.setText(list.get(position).get("steps"));
-                viewHolder.str.setText("        累计步数");
-                viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
-            }
-        });
-
+                @Override
+                public void onFailure(String failureMsg) {
+                    viewHolder.nickname.setText(list.get(position).get("nickname"));
+                    viewHolder.rank.setText(list.get(position).get("rank"));
+                    viewHolder.steps.setText(list.get(position).get("steps"));
+                    viewHolder.str.setText("        累计步数");
+                    viewHolder.avatar.setImageResource(R.drawable.ic_baseline_person_24);
+                }
+            });
+        }
 
         return convertView;
     }

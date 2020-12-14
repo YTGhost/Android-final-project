@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +40,13 @@ import com.bjtu.campus_information_platform.model.Step;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.OkHttpException;
 import com.bjtu.campus_information_platform.util.network.RequestParams;
+import com.bjtu.campus_information_platform.util.network.ResponseByteCallback;
 import com.bjtu.campus_information_platform.util.network.ResponseCallback;
 import com.today.step.lib.ISportStepInterface;
 import com.today.step.lib.TodayStepManager;
 import com.today.step.lib.TodayStepService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,6 +66,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     public View view;
     private ListView listView;
     ImageView mImageView;
+    View header;
 
     //循环取当前时刻的步数中间的间隔时间
     private long TIME_INTERVAL_REFRESH = 3000;
@@ -73,12 +77,13 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
     private CountDownTimer countDownTimer;
     private Handler mHandler = new Handler();
 
+    public Map<String,String> map=new HashMap<>();
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
 
     private Boolean isFinished = true;
-
+    private Boolean isFirst=true;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -89,8 +94,25 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
 
         listView = view.findViewById(R.id.step_list_view);
-        View header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
+        header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
         mImageView = (ImageView) header.findViewById(R.id.layout_header_image);
+        if(map.get(getApplication().account.getBackgroundUrl())==null){
+            HttpRequest.getImgApi(getApplication().account.getBackgroundUrl(), null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+                @Override
+                public void onSuccess(File file) {
+                    map.put(getApplication().account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
+                    mImageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+                }
+
+                @Override
+                public void onFailure(String failureMsg) {
+
+                }
+            });
+        }else{
+            mImageView.setImageURI(Uri.parse(map.get(getApplication().account.getBackgroundUrl())));
+        }
+
         listView.addHeaderView(header);
 
         initRefreshLayout();
@@ -233,12 +255,37 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     userData.put("avatarUrl", list.get(i).getAvatarUrl());
                     data.add(userData);
                 }
+                if(map.get(getApplication().account.getBackgroundUrl())==null){
+                    HttpRequest.getImgApi(getApplication().account.getBackgroundUrl(), null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+                        @Override
+                        public void onSuccess(File file) {
+                            map.put(getApplication().account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
+                            listView.setAdapter(null);
+                            listView.removeHeaderView(header);
+                            header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
+                            mImageView = (ImageView) header.findViewById(R.id.layout_header_image);
+                            mImageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
+                            header.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,500));
+                            listView.addHeaderView(header);
+                            listView.setAdapter(new MyListViewAdapter(activity, data));
+                            fixListViewHeight(listView);
+                            mRefreshLayout.endRefreshing();
+                            isFinished = true;
+                        }
+
+                        @Override
+                        public void onFailure(String failureMsg) {
+
+                        }
+                    });
+                }else{
+                    listView.setAdapter(new MyListViewAdapter(activity, data));
+                    fixListViewHeight(listView);
+                    mRefreshLayout.endRefreshing();
+                    isFinished = true;
+                }
 
 
-                listView.setAdapter(new MyListViewAdapter(activity, data));
-                fixListViewHeight(listView);
-                mRefreshLayout.endRefreshing();
-                isFinished = true;
             }
 
             @Override
