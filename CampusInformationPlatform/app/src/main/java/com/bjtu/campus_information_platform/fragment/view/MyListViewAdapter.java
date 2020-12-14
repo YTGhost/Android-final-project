@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bjtu.campus_information_platform.R;
+import com.bjtu.campus_information_platform.activity.MyApplication;
 import com.bjtu.campus_information_platform.util.network.HttpRequest;
 import com.bjtu.campus_information_platform.util.network.ResponseByteCallback;
 
@@ -61,8 +62,8 @@ public class MyListViewAdapter extends BaseAdapter {
         viewHolder.str = (TextView) convertView.findViewById(R.id.str);
 
         String url = list.get(position).get("avatarUrl");
-        if(getApplication().sportFragment.map.get(url)!=null){
-            viewHolder.avatar.setImageURI(Uri.parse(getApplication().sportFragment.map.get(url)));
+        if(sportFragment.map.get(url)!=null&&new File(sportFragment.map.get(url)).exists()){
+            viewHolder.avatar.setImageURI(Uri.parse(sportFragment.map.get(url)));
             viewHolder.nickname.setText(list.get(position).get("nickname"));
             viewHolder.rank.setText(list.get(position).get("rank"));
             viewHolder.steps.setText(list.get(position).get("steps"));
@@ -76,7 +77,7 @@ public class MyListViewAdapter extends BaseAdapter {
                     viewHolder.steps.setText(list.get(position).get("steps"));
                     viewHolder.str.setText("        累计步数");
                     Log.e("TAG", "图片下载成功=" + file.getAbsolutePath());
-                    getApplication().sportFragment.map.put(url,Uri.fromFile(new File(file.getAbsolutePath())).toString());
+                    sportFragment.map.put(url,Uri.fromFile(new File(file.getAbsolutePath())).toString());
                     viewHolder.avatar.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
                 }
 

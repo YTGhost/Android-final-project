@@ -99,11 +99,12 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
         listView = view.findViewById(R.id.step_list_view);
         header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
         mImageView = (ImageView) header.findViewById(R.id.layout_header_image);
-        if(map.get(getApplication().account.getBackgroundUrl())==null){
-            HttpRequest.getImgApi(getApplication().account.getBackgroundUrl(), null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+        String bgUri= map.get(MyApplication.account.getBackgroundUrl());
+        if(bgUri==null||!new File(bgUri).exists()){
+            HttpRequest.getImgApi(MyApplication.account.getBackgroundUrl(), null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
                 @Override
                 public void onSuccess(File file) {
-                    map.put(getApplication().account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
+                    map.put(MyApplication.account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
                     mImageView.setImageURI(Uri.fromFile(new File(file.getAbsolutePath())));
                     if(listView.getHeaderViewsCount()!=0&&!isRefreshing){
                         beginRefreshing();
@@ -116,7 +117,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 }
             });
         }else{
-            mImageView.setImageURI(Uri.parse(map.get(getApplication().account.getBackgroundUrl())));
+            mImageView.setImageURI(Uri.parse(map.get(MyApplication.account.getBackgroundUrl())));
         }
 
         listView.addHeaderView(header);
@@ -128,7 +129,6 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
 
 
 
-        //权限申请
 
         //开启计步Service，同时绑定Activity进行aidl通信
         Intent intent = new Intent(this.activity, TodayStepService.class);
@@ -209,7 +209,7 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                 List<Step> list = (List<Step>) responseObj;
                 List<Map<String, String>> data = new ArrayList<>();
                 for (int i = 0; i < list.size(); i++) {
-                    if(list.get(i).getNickname().equals(getApplication().account.getNickname())&&list.get(i).getSteps()>mStepSum){
+                    if(list.get(i).getNickname().equals(MyApplication.account.getNickname())&&list.get(i).getSteps()>mStepSum){
                         mStepSum=list.get(i).getSteps();
 
                     }
@@ -220,11 +220,12 @@ public class SportFragment extends Fragment implements BGARefreshLayout.BGARefre
                     userData.put("avatarUrl", list.get(i).getAvatarUrl());
                     data.add(userData);
                 }
-                if(map.get(getApplication().account.getBackgroundUrl())==null){
-                    HttpRequest.getImgApi(getApplication().account.getBackgroundUrl(), null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
+                String bgUri=map.get(MyApplication.account.getBackgroundUrl());
+                if(bgUri==null||!new File(bgUri).exists()){
+                    HttpRequest.getImgApi(MyApplication.account.getBackgroundUrl(), null, String.valueOf(System.currentTimeMillis()) + ".png", new ResponseByteCallback() {
                         @Override
                         public void onSuccess(File file) {
-                            map.put(getApplication().account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
+                            map.put(MyApplication.account.getBackgroundUrl(),Uri.fromFile(new File(file.getAbsolutePath())).toString());
                             listView.setAdapter(null);
                             listView.removeHeaderView(header);
                             header = LayoutInflater.from(activity).inflate(R.layout.listview_header, null);
