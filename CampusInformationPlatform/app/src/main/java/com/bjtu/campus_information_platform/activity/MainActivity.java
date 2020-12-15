@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> permissionList = new ArrayList<>();
 
         // 判断权限是否已经授予，没有就把该权限添加到列表中
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q&&ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.ACTIVITY_RECOGNITION);
         }
