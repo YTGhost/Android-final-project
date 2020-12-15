@@ -194,13 +194,13 @@ public class ClassListFragment extends Fragment {
         RequestParams param = new RequestParams();
         param.put("id",String.valueOf(MyApplication.account.getId()));
         param.put("day",String.valueOf(getDay));
-        param.put("startTime",String.valueOf((int)(v.getY()/180+1)));
+        param.put("startTime",String.valueOf((int)(v.getY()/280+1)));
         HttpRequest.deleteClass(param, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 v.setVisibility(View.GONE);//先隐藏
                 day.removeView(v);//再移除课程视图
-                classMap.remove((int)(dayId*100+v.getY()/180-1));
+                classMap.remove((int)(dayId*100+v.getY()/280-1));
                 Toast.makeText(MyApplication.context,"删除成功",Toast.LENGTH_LONG).show();
             }
 
