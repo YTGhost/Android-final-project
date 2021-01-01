@@ -1,10 +1,10 @@
 spring:
   datasource:
 # 数据源基本配置
-    username: root
-    password: yt232419
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://182.92.66.200:6381/android
+    url: jdbc:mysql://
     type: com.alibaba.druid.pool.DruidDataSource
 # 数据源其他配置
     druid:
@@ -26,9 +26,9 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMills=500
 # 邮件发送配置
   mail:
-    host: smtp.163.com
-    password: ORVJZMWZQPYRLZIN
-    username: ythihia@163.com
+    host:
+    password:
+    username:
     port: 465
     protocol: smtps
     default-encoding: UTF-8
@@ -37,12 +37,12 @@ spring:
       request-timeout: 20000
 
 server:
-  port: 6382
+  port:
 
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-beijing.aliyuncs.com
-      keyid: LTAI4GGdC1Ekd7eDxJCkzQKS
-      keysecret: TF0c10oRE0XXsar19d6cNROeQr0sVN
-      bucketname: hihia
+      endpoint:
+      keyid:
+      keysecret:
+      bucketname:
