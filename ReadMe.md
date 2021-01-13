@@ -18,7 +18,7 @@ The project adopts a development model that separates the front and back ends. T
 
 The back end of the project and the database are deployed on the cloud server, using Nginx as the reverse proxy web server.
 
-![image-20201219233853353](http://image.hihia.top/Screenshot/image-20201219233853353.png)
+![image-20201219233853353](https://image.hihia.top/Screenshot/image-20201219233853353.png)
 
 ## Project Architecture
 
@@ -36,12 +36,12 @@ Druid：https://www.hihia.top/android-back-end-api/druid/index.html
 
 Nginx configuration is as follows:
 
-<img src="http://image.hihia.top/Screenshot/image-20201220200313440.png" alt="image-20201220200313440" style="zoom:50%;" />
+<img src="https://image.hihia.top/Screenshot/image-20201220200313440.png" alt="image-20201220200313440" style="zoom:50%;" />
 
-<img src="http://image.hihia.top/Screenshot/image-20201220200236054.png" alt="image-20201220200236054" style="zoom:50%;" />
+<img src="https://image.hihia.top/Screenshot/image-20201220200236054.png" alt="image-20201220200236054" style="zoom:50%;" />
 
 ### Database
 
 Database construction using docker:
 
-![image-20201220200613795](http://image.hihia.top/Screenshot/image-20201220200613795.png)
+![image-20201220200613795](https://image.hihia.top/Screenshot/image-20201220200613795.png)
