@@ -2,7 +2,7 @@
 
 ## Document Directory
 
-`android-back-end` is the back-end project，`CampusInformationPlatform` is the Android project，`android.sql` is the database file.
+`android-back-end` is the back-end project，`CampusInformationPlatform` is the Android project，`android.sql` is the database file, and `Document` is the document of the project.
 
 ## Experience Address
 
